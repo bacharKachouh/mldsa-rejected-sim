@@ -19,7 +19,7 @@ data-flow model of the threshold protocol that items 9 to 11 use.
 | `01_decompose_counts.py` | Lemma "bad counts are shift-independent" | 393 / 394 bad residues per cell for every shift | 1 min |
 | `02_typical_pairs.py [N]` | Fact "typical pairs" | no rank-deficient slot in N random nonce pairs; flagged-coordinate frequency | < 1 min |
 | `03a_toy_chi2.py` | toy-scale collision form | exact chi^2 by enumeration at toy parameters | minutes |
-| `03b_toy_pair_weights.py [1] [2] [3]` | atypical-pair weights | per-pair weights at toy scale; NTT zeros of short polynomials; character bounds | minutes |
+| `03b_toy_pair_weights.py [1] [2]` | atypical-pair weights | per-pair weights at toy scale; NTT zeros of short polynomials | minutes |
 | `04a_coset_constants_and_block_small.py [A] [B3] [B4]` | Table "coset constants"; block-small searches | M_s for phi = min(1, 64/\|a\|) and min(1, 8/\|a\|); block-small maxima | 1 min per s (A); longer for B |
 | `04b_coset_constants_independent.py` | Table "coset constants" | second implementation, different conventions (`PHI_K=64` default) | 1 min per s |
 | `06_atypical_mass.py` | Theorems "unconditional atypical mass" and "unconditional bound" | the full (s, slot kinds) accounting with and without certificates, the coset accounting, and the final distance | 12 min |
