@@ -1,0 +1,126 @@
+{
+ "config": {
+  "N": 2,
+  "protocol": "lowgear",
+  "K": 1,
+  "net": "local",
+  "seed": 1,
+  "debug": false,
+  "circuit": "opt",
+  "tag": "-opt"
+ },
+ "when": "2026-09-26T03:51:31",
+ "git": "1ae4584",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 0.0837622,
+  "party0_MB": 0.962838,
+  "rounds": 13,
+  "global_MB": 0.962954,
+  "online": {
+   "time_s": 0.000675785,
+   "MB": 0.045088,
+   "rounds": 5
+  },
+  "prep": {
+   "time_s": 0.0811739,
+   "MB": 0.91775,
+   "rounds": 8
+  },
+  "wall_s": 0.21106839179992676,
+  "party1": {
+   "time_s": 0.0837651,
+   "party0_MB": 0.000116,
+   "rounds": 13,
+   "global_MB": 0.962954,
+   "online": {
+    "time_s": 0.000610844,
+    "MB": 3.2e-05,
+    "rounds": 5
+   },
+   "prep": {
+    "time_s": 0.0812217,
+    "MB": 8.4e-05,
+    "rounds": 8
+   }
+  }
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 24.5566,
+    "party0_MB": 1085.49,
+    "rounds": 127225,
+    "global_MB": 2170.99,
+    "online": {
+     "time_s": 0.121119,
+     "MB": 0.128916,
+     "rounds": 195
+    },
+    "prep": {
+     "time_s": 24.4312,
+     "MB": 1085.37,
+     "rounds": 127030
+    },
+    "wall_s": 24.690500259399414,
+    "party1": {
+     "time_s": 24.5566,
+     "party0_MB": 1085.49,
+     "rounds": 127100,
+     "global_MB": 2170.99,
+     "online": {
+      "time_s": 0.120477,
+      "MB": 0.128916,
+      "rounds": 195
+     },
+     "prep": {
+      "time_s": 24.4316,
+      "MB": 1085.37,
+      "rounds": 126905
+     }
+    }
+   },
+   "online": {
+    "time_s": 21.0603,
+    "party0_MB": 953.898,
+    "rounds": 80121,
+    "global_MB": 1907.8,
+    "online": {
+     "time_s": 0.0636759,
+     "MB": 0.140659,
+     "rounds": 111
+    },
+    "prep": {
+     "time_s": 20.9908,
+     "MB": 953.758,
+     "rounds": 80010
+    },
+    "wall_s": 21.193440914154053,
+    "party1": {
+     "time_s": 21.0601,
+     "party0_MB": 953.898,
+     "rounds": 80012,
+     "global_MB": 1907.8,
+     "online": {
+      "time_s": 0.0632659,
+      "MB": 0.140659,
+      "rounds": 111
+     },
+     "prep": {
+      "time_s": 20.9909,
+      "MB": 953.758,
+      "rounds": 79901
+     }
+    }
+   },
+   "jstar": 0
+  }
+ ],
+ "attempts": 1,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}

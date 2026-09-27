@@ -62,4 +62,4 @@ def log2_up(F, step=Fraction(1, 100)):
 
 
 def fmt(k):
-    return f"2^{float(k):.2f}"
+    return f"2^{float(k):.3f}"

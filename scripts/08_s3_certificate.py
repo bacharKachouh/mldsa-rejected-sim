@@ -116,7 +116,8 @@ def splits(k):
 
 def combine():
     import glob
-    from rigorous import Lambda_up, tail_up, log2_up, fmt
+    from rigorous import Lambda_up, tail_up, log2_up as _l2, fmt
+    log2_up = lambda F: _l2(F, Fraction(1, 1000))
     files = sorted(glob.glob("s3_chunk_*.json"))
     chunks = [json.load(open(f)) for f in files]
     covered = sorted((c["start"], c["end"]) for c in chunks)

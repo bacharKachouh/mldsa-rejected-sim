@@ -1,0 +1,48 @@
+{
+ "config": {
+  "N": 2,
+  "protocol": "mascot",
+  "K": 4,
+  "prep": "real",
+  "net": "local",
+  "seed": 1,
+  "debug": false,
+  "tag": ""
+ },
+ "when": "2026-09-25T22:28:04",
+ "git": "2fd5cc6",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 0.0421468,
+  "party0_MB": 5.81439,
+  "rounds": 13,
+  "global_MB": 5.8145,
+  "wall_s": 0.1519336700439453
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 605.654,
+    "party0_MB": 79680.0,
+    "rounds": 2851407,
+    "global_MB": 159360.0,
+    "wall_s": 605.7417902946472
+   },
+   "online": {
+    "time_s": 203.073,
+    "party0_MB": 26584.4,
+    "rounds": 956607,
+    "global_MB": 53168.8,
+    "wall_s": 203.17114162445068
+   },
+   "jstar": 3
+  }
+ ],
+ "attempts": 4,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}

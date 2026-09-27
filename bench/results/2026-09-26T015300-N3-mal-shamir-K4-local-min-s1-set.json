@@ -1,0 +1,110 @@
+{
+ "config": {
+  "N": 3,
+  "protocol": "mal-shamir",
+  "K": 4,
+  "net": "local",
+  "seed": 1,
+  "debug": false,
+  "circuit": "min",
+  "tag": "-set"
+ },
+ "when": "2026-09-26T01:53:00",
+ "git": "7b55daf",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 0.00156858,
+  "party0_MB": 0.045056,
+  "rounds": 2,
+  "global_MB": 0.045056,
+  "online": null,
+  "prep": null,
+  "wall_s": 0.11953401565551758,
+  "party1": {
+   "time_s": 0.00156227,
+   "party0_MB": 0.0,
+   "rounds": 2,
+   "global_MB": 0.045056,
+   "online": null,
+   "prep": null
+  }
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 24.7494,
+    "party0_MB": 3464.94,
+    "rounds": 12587,
+    "global_MB": 10252.5,
+    "online": {
+     "time_s": 0.364728,
+     "MB": 28.3116,
+     "rounds": 33
+    },
+    "prep": {
+     "time_s": 24.3748,
+     "MB": 3436.63,
+     "rounds": 12554
+    },
+    "wall_s": 24.856579542160034,
+    "party1": {
+     "time_s": 24.7494,
+     "party0_MB": 3464.78,
+     "rounds": 12587,
+     "global_MB": 10252.5,
+     "online": {
+      "time_s": 0.368521,
+      "MB": 28.3116,
+      "rounds": 33
+     },
+     "prep": {
+      "time_s": 24.371,
+      "MB": 3436.46,
+      "rounds": 12554
+     }
+    }
+   },
+   "online": {
+    "time_s": 16.4983,
+    "party0_MB": 2330.29,
+    "rounds": 2966,
+    "global_MB": 6895.99,
+    "online": {
+     "time_s": 0.269187,
+     "MB": 39.1401,
+     "rounds": 34
+    },
+    "prep": {
+     "time_s": 16.2175,
+     "MB": 2291.15,
+     "rounds": 2932
+    },
+    "wall_s": 16.61455488204956,
+    "party1": {
+     "time_s": 16.4982,
+     "party0_MB": 2330.52,
+     "rounds": 2966,
+     "global_MB": 6895.99,
+     "online": {
+      "time_s": 0.290179,
+      "MB": 39.1401,
+      "rounds": 34
+     },
+     "prep": {
+      "time_s": 16.1964,
+      "MB": 2291.38,
+      "rounds": 2932
+     }
+    }
+   },
+   "jstar": 1
+  }
+ ],
+ "attempts": 4,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}

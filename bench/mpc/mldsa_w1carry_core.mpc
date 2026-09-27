@@ -1,0 +1,53 @@
+# COUNT-ONLY probe: the secure core of F_w1 via the carry identity (paper, Section 9), for comparing
+# its preprocessing requirements with mldsa_offline_opt.mpc. Not part of the benchmark pipeline.
+# Inputs (here from party 0, only to obtain compiler counts): per coefficient the sums over the N
+# parties of the local values w'_i in [0, q), h_i = w'_i // alpha, l_i = w'_i % alpha.
+#   Q      = #{ j in 1..N-1 : sum w' >= j q }                       (wrap count)
+#   X      = sum l - Q in [-(N-1), N alpha)
+#   m + up = #{ t in {j alpha, j alpha + gamma2 + 1 : j = 0..N-1} : X >= t }   (carry + FIPS centring)
+#   V      = sum h - 16 Q + m + up in [0, 16];  top = [V >= 16];  w1 = V - 16 top
+#   r0     = X - alpha (m + up) - top
+# Args: N.
+from Compiler import comparison
+program.use_edabit(True)
+
+N = int(program.args[1])
+q, n, k = 8380417, 256, 6
+gamma2 = 261888
+alpha = 2 * gamma2
+V_ = k * n
+SEC = program.security
+
+
+def masked_open(x, width):
+    r, rbits = sint.get_edabit(width, True, size=x.size)
+    r_hi = sint.get_edabit(SEC, True, size=x.size)[0]
+    opening = (x + (1 << (width - 1)) + r + (r_hi << width)).reveal()
+    return opening, rbits
+
+
+def geq(opening, rbits, width, T):
+    P = (opening - T) % (1 << width)
+    pbits = rbits[0].bit_decompose_clear(P, width - 1)
+    borrow = comparison.BitLTL_raw(pbits, rbits[:width - 1])
+    return sintbit.conv(rbits[width - 1].bit_xor(P >> (width - 1)).bit_xor(borrow))
+
+
+sw = sint.get_input_from(0, size=V_)
+sh = sint.get_input_from(0, size=V_)
+sl = sint.get_input_from(0, size=V_)
+
+wq = (N * q).bit_length() + 1
+ow, rw = masked_open(sw - (N * q) // 2, wq)
+Q = sum(geq(ow, rw, wq, j * q - (N * q) // 2) for j in range(1, N))
+
+X = sl - Q
+wx = (N * alpha).bit_length() + 1
+ox, rx = masked_open(X - (N * alpha) // 2, wx)
+mu = sum(geq(ox, rx, wx, j * alpha - (N * alpha) // 2) + geq(ox, rx, wx, j * alpha + gamma2 + 1 - (N * alpha) // 2)
+         for j in range(N))
+Vv = sh - 16 * Q + mu
+top = Vv.greater_equal(16, bit_length=6)
+w1 = Vv - 16 * top
+r0 = X - alpha * mu - top
+print_ln('%s %s', w1.reveal(), r0.reveal())

@@ -1,0 +1,78 @@
+{
+ "config": {
+  "N": 2,
+  "protocol": "mascot",
+  "K": 4,
+  "net": "local",
+  "seed": 1,
+  "debug": false,
+  "circuit": "min",
+  "tag": ""
+ },
+ "when": "2026-09-25T23:19:57",
+ "git": "73465f3",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 0.0382815,
+  "party0_MB": 5.81439,
+  "rounds": 13,
+  "global_MB": 5.8145,
+  "online": {
+   "time_s": 0.000775193,
+   "MB": 0.045088,
+   "rounds": 5
+  },
+  "prep": {
+   "time_s": 0.0361368,
+   "MB": 5.7693,
+   "rounds": 8
+  },
+  "wall_s": 0.13981962203979492
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 244.562,
+    "party0_MB": 33759.2,
+    "rounds": 884857,
+    "global_MB": 67518.5,
+    "online": {
+     "time_s": 0.512203,
+     "MB": 0.99604,
+     "rounds": 121
+    },
+    "prep": {
+     "time_s": 244.035,
+     "MB": 33758.2,
+     "rounds": 884736
+    },
+    "wall_s": 244.68424463272095
+   },
+   "online": {
+    "time_s": 158.059,
+    "party0_MB": 21669.7,
+    "rounds": 567549,
+    "global_MB": 43339.4,
+    "online": {
+     "time_s": 0.270029,
+     "MB": 0.875998,
+     "rounds": 109
+    },
+    "prep": {
+     "time_s": 157.773,
+     "MB": 21668.8,
+     "rounds": 567440
+    },
+    "wall_s": 158.16917753219604
+   },
+   "jstar": 0
+  }
+ ],
+ "attempts": 4,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}

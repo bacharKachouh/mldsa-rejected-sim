@@ -1,0 +1,325 @@
+{
+ "config": {
+  "N": 2,
+  "protocol": "highgear",
+  "K": 4,
+  "net": "local",
+  "seed": 1,
+  "debug": false,
+  "circuit": "min",
+  "tag": "-flag"
+ },
+ "when": "2026-09-26T03:46:38",
+ "git": "1ae4584",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 6.44624,
+  "party0_MB": 98.5517,
+  "rounds": 78,
+  "global_MB": 123.914,
+  "online": {
+   "time_s": 0.000817524,
+   "MB": 0.045056,
+   "rounds": 4
+  },
+  "prep": {
+   "time_s": 6.44083,
+   "MB": 98.5066,
+   "rounds": 74
+  },
+  "wall_s": 439.32524394989014,
+  "party1": {
+   "time_s": 6.44603,
+   "party0_MB": 25.3624,
+   "rounds": 78,
+   "global_MB": 123.914,
+   "online": null,
+   "prep": null
+  }
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 289.338,
+    "party0_MB": 7860.58,
+    "rounds": 887832,
+    "global_MB": 15721.2,
+    "online": {
+     "time_s": 0.523127,
+     "MB": 0.99604,
+     "rounds": 121
+    },
+    "prep": {
+     "time_s": 288.808,
+     "MB": 7859.58,
+     "rounds": 887711
+    },
+    "wall_s": 289.50656247138977,
+    "party1": {
+     "time_s": 289.338,
+     "party0_MB": 7860.58,
+     "rounds": 887011,
+     "global_MB": 15721.2,
+     "online": {
+      "time_s": 0.515425,
+      "MB": 0.99604,
+      "rounds": 121
+     },
+     "prep": {
+      "time_s": 288.816,
+      "MB": 7859.58,
+      "rounds": 886890
+     }
+    }
+   },
+   "online": {
+    "time_s": 192.955,
+    "party0_MB": 6025.74,
+    "rounds": 571499,
+    "global_MB": 12051.5,
+    "online": {
+     "time_s": 0.275885,
+     "MB": 0.855466,
+     "rounds": 103
+    },
+    "prep": {
+     "time_s": 192.671,
+     "MB": 6024.88,
+     "rounds": 571396
+    },
+    "wall_s": 193.12851428985596,
+    "party1": {
+     "time_s": 192.955,
+     "party0_MB": 6025.74,
+     "rounds": 570772,
+     "global_MB": 12051.5,
+     "online": {
+      "time_s": 0.273389,
+      "MB": 0.855466,
+      "rounds": 103
+     },
+     "prep": {
+      "time_s": 192.673,
+      "MB": 6024.88,
+      "rounds": 570669
+     }
+    }
+   },
+   "jstar": -1
+  },
+  {
+   "offline": {
+    "time_s": 289.564,
+    "party0_MB": 7860.58,
+    "rounds": 887832,
+    "global_MB": 15721.2,
+    "online": {
+     "time_s": 0.506872,
+     "MB": 0.99604,
+     "rounds": 121
+    },
+    "prep": {
+     "time_s": 289.05,
+     "MB": 7859.58,
+     "rounds": 887711
+    },
+    "wall_s": 289.73734974861145,
+    "party1": {
+     "time_s": 289.564,
+     "party0_MB": 7860.58,
+     "rounds": 887011,
+     "global_MB": 15721.2,
+     "online": {
+      "time_s": 0.501159,
+      "MB": 0.99604,
+      "rounds": 121
+     },
+     "prep": {
+      "time_s": 289.055,
+      "MB": 7859.58,
+      "rounds": 886890
+     }
+    }
+   },
+   "online": {
+    "time_s": 194.184,
+    "party0_MB": 6025.74,
+    "rounds": 571499,
+    "global_MB": 12051.5,
+    "online": {
+     "time_s": 0.279039,
+     "MB": 0.855466,
+     "rounds": 103
+    },
+    "prep": {
+     "time_s": 193.896,
+     "MB": 6024.88,
+     "rounds": 571396
+    },
+    "wall_s": 194.35408806800842,
+    "party1": {
+     "time_s": 194.184,
+     "party0_MB": 6025.74,
+     "rounds": 570772,
+     "global_MB": 12051.5,
+     "online": {
+      "time_s": 0.275872,
+      "MB": 0.855466,
+      "rounds": 103
+     },
+     "prep": {
+      "time_s": 193.899,
+      "MB": 6024.88,
+      "rounds": 570669
+     }
+    }
+   },
+   "jstar": -1
+  },
+  {
+   "offline": {
+    "time_s": 290.007,
+    "party0_MB": 7860.58,
+    "rounds": 887832,
+    "global_MB": 15721.2,
+    "online": {
+     "time_s": 0.507582,
+     "MB": 0.99604,
+     "rounds": 121
+    },
+    "prep": {
+     "time_s": 289.491,
+     "MB": 7859.58,
+     "rounds": 887711
+    },
+    "wall_s": 290.18243169784546,
+    "party1": {
+     "time_s": 290.007,
+     "party0_MB": 7860.58,
+     "rounds": 887011,
+     "global_MB": 15721.2,
+     "online": {
+      "time_s": 0.51728,
+      "MB": 0.99604,
+      "rounds": 121
+     },
+     "prep": {
+      "time_s": 289.481,
+      "MB": 7859.58,
+      "rounds": 886890
+     }
+    }
+   },
+   "online": {
+    "time_s": 193.76,
+    "party0_MB": 6025.74,
+    "rounds": 571499,
+    "global_MB": 12051.5,
+    "online": {
+     "time_s": 0.275635,
+     "MB": 0.855466,
+     "rounds": 103
+    },
+    "prep": {
+     "time_s": 193.476,
+     "MB": 6024.88,
+     "rounds": 571396
+    },
+    "wall_s": 193.94027757644653,
+    "party1": {
+     "time_s": 193.759,
+     "party0_MB": 6025.74,
+     "rounds": 570772,
+     "global_MB": 12051.5,
+     "online": {
+      "time_s": 0.2736,
+      "MB": 0.855466,
+      "rounds": 103
+     },
+     "prep": {
+      "time_s": 193.477,
+      "MB": 6024.88,
+      "rounds": 570669
+     }
+    }
+   },
+   "jstar": -1
+  },
+  {
+   "offline": {
+    "time_s": 288.762,
+    "party0_MB": 7860.58,
+    "rounds": 887832,
+    "global_MB": 15721.2,
+    "online": {
+     "time_s": 0.503018,
+     "MB": 0.99604,
+     "rounds": 121
+    },
+    "prep": {
+     "time_s": 288.252,
+     "MB": 7859.58,
+     "rounds": 887711
+    },
+    "wall_s": 288.9370641708374,
+    "party1": {
+     "time_s": 288.762,
+     "party0_MB": 7860.58,
+     "rounds": 887011,
+     "global_MB": 15721.2,
+     "online": {
+      "time_s": 0.503251,
+      "MB": 0.99604,
+      "rounds": 121
+     },
+     "prep": {
+      "time_s": 288.251,
+      "MB": 7859.58,
+      "rounds": 886890
+     }
+    }
+   },
+   "online": {
+    "time_s": 194.072,
+    "party0_MB": 6025.76,
+    "rounds": 571505,
+    "global_MB": 12051.5,
+    "online": {
+     "time_s": 0.278003,
+     "MB": 0.875998,
+     "rounds": 109
+    },
+    "prep": {
+     "time_s": 193.785,
+     "MB": 6024.88,
+     "rounds": 571396
+    },
+    "wall_s": 194.2544994354248,
+    "party1": {
+     "time_s": 194.072,
+     "party0_MB": 6025.76,
+     "rounds": 570778,
+     "global_MB": 12051.5,
+     "online": {
+      "time_s": 0.279712,
+      "MB": 0.875998,
+      "rounds": 109
+     },
+     "prep": {
+      "time_s": 193.783,
+      "MB": 6024.88,
+      "rounds": 570669
+     }
+    }
+   },
+   "jstar": 1
+  }
+ ],
+ "attempts": 16,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}

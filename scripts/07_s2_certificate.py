@@ -88,7 +88,8 @@ def part_rigorous(X=128, Lhalf=64):
     2 * tail_up(64) * Lambda_up(64) of rigorous.py.
     """
     from fractions import Fraction
-    from rigorous import Lambda_up, tail_up, log2_up, fmt
+    from rigorous import Lambda_up, tail_up, log2_up as _l2, fmt
+    log2_up = lambda F: _l2(F, Fraction(1, 1000))
     print(f"PART R  s=2 certificate, certified: all C(256,2)={256*255//2} slot pairs")
     t0 = time.time()
     r = np.arange(-X, X + 1, dtype=np.int64)

@@ -1,0 +1,195 @@
+{
+ "config": {
+  "N": 2,
+  "protocol": "lowgear",
+  "K": 4,
+  "net": "local",
+  "seed": 1,
+  "debug": false,
+  "circuit": "min",
+  "tag": "-set"
+ },
+ "when": "2026-09-26T01:48:31",
+ "git": "7b55daf",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 0.0845144,
+  "party0_MB": 0.962838,
+  "rounds": 13,
+  "global_MB": 0.962954,
+  "online": {
+   "time_s": 0.000678636,
+   "MB": 0.045088,
+   "rounds": 5
+  },
+  "prep": {
+   "time_s": 0.0820049,
+   "MB": 0.91775,
+   "rounds": 8
+  },
+  "wall_s": 0.2162179946899414,
+  "party1": {
+   "time_s": 0.084484,
+   "party0_MB": 0.000116,
+   "rounds": 13,
+   "global_MB": 0.962954,
+   "online": {
+    "time_s": 0.00082188,
+    "MB": 3.2e-05,
+    "rounds": 5
+   },
+   "prep": {
+    "time_s": 0.0818977,
+    "MB": 8.4e-05,
+    "rounds": 8
+   }
+  }
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 156.383,
+    "party0_MB": 6920.54,
+    "rounds": 888753,
+    "global_MB": 13841.1,
+    "online": {
+     "time_s": 0.505776,
+     "MB": 0.99604,
+     "rounds": 121
+    },
+    "prep": {
+     "time_s": 155.868,
+     "MB": 6919.54,
+     "rounds": 888632
+    },
+    "wall_s": 156.50922417640686,
+    "party1": {
+     "time_s": 156.383,
+     "party0_MB": 6920.54,
+     "rounds": 887932,
+     "global_MB": 13841.1,
+     "online": {
+      "time_s": 0.505963,
+      "MB": 0.99604,
+      "rounds": 121
+     },
+     "prep": {
+      "time_s": 155.868,
+      "MB": 6919.54,
+      "rounds": 887811
+     }
+    }
+   },
+   "online": {
+    "time_s": 105.866,
+    "party0_MB": 5408.24,
+    "rounds": 572567,
+    "global_MB": 10816.5,
+    "online": {
+     "time_s": 0.270917,
+     "MB": 0.855466,
+     "rounds": 103
+    },
+    "prep": {
+     "time_s": 105.586,
+     "MB": 5407.39,
+     "rounds": 572464
+    },
+    "wall_s": 105.99820852279663,
+    "party1": {
+     "time_s": 105.866,
+     "party0_MB": 5408.24,
+     "rounds": 571840,
+     "global_MB": 10816.5,
+     "online": {
+      "time_s": 0.266125,
+      "MB": 0.855466,
+      "rounds": 103
+     },
+     "prep": {
+      "time_s": 105.591,
+      "MB": 5407.39,
+      "rounds": 571737
+     }
+    }
+   },
+   "jstar": -1
+  },
+  {
+   "offline": {
+    "time_s": 155.558,
+    "party0_MB": 6920.54,
+    "rounds": 888753,
+    "global_MB": 13841.1,
+    "online": {
+     "time_s": 0.508657,
+     "MB": 0.99604,
+     "rounds": 121
+    },
+    "prep": {
+     "time_s": 155.041,
+     "MB": 6919.54,
+     "rounds": 888632
+    },
+    "wall_s": 155.69270753860474,
+    "party1": {
+     "time_s": 155.558,
+     "party0_MB": 6920.54,
+     "rounds": 887932,
+     "global_MB": 13841.1,
+     "online": {
+      "time_s": 0.509871,
+      "MB": 0.99604,
+      "rounds": 121
+     },
+     "prep": {
+      "time_s": 155.039,
+      "MB": 6919.54,
+      "rounds": 887811
+     }
+    }
+   },
+   "online": {
+    "time_s": 105.808,
+    "party0_MB": 5408.27,
+    "rounds": 572573,
+    "global_MB": 10816.5,
+    "online": {
+     "time_s": 0.268967,
+     "MB": 0.875998,
+     "rounds": 109
+    },
+    "prep": {
+     "time_s": 105.532,
+     "MB": 5407.39,
+     "rounds": 572464
+    },
+    "wall_s": 105.9440746307373,
+    "party1": {
+     "time_s": 105.808,
+     "party0_MB": 5408.27,
+     "rounds": 571846,
+     "global_MB": 10816.5,
+     "online": {
+      "time_s": 0.261647,
+      "MB": 0.875998,
+      "rounds": 109
+     },
+     "prep": {
+      "time_s": 105.539,
+      "MB": 5407.39,
+      "rounds": 571737
+     }
+    }
+   },
+   "jstar": 0
+  }
+ ],
+ "attempts": 8,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}

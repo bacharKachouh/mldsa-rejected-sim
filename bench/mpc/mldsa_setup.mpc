@@ -1,0 +1,10 @@
+# One-time key load for the benchmark (stands in for the DKG, which is out of scope).
+# Party 0 inputs s1 (l*n = 1280 coefficients) then s2 (k*n = 1536) from Player-Data/Input-P0-0;
+# the shares are persisted at positions 0 and 1280 for the online program.
+n, k, l = 256, 6, 5
+
+s1 = sint.get_input_from(0, size=l * n)
+s2 = sint.get_input_from(0, size=k * n)
+sint.write_to_file([s1], position=0)
+sint.write_to_file([s2], position=l * n)
+print_ln('SETUP done')

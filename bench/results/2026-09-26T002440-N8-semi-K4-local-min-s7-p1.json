@@ -1,0 +1,110 @@
+{
+ "config": {
+  "N": 8,
+  "protocol": "semi",
+  "K": 4,
+  "net": "local",
+  "seed": 7,
+  "debug": false,
+  "circuit": "min",
+  "tag": "-p1"
+ },
+ "when": "2026-09-26T00:24:40",
+ "git": "ecdde93",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 0.0043051,
+  "party0_MB": 0.0,
+  "rounds": 0,
+  "global_MB": 0.0,
+  "online": null,
+  "prep": null,
+  "wall_s": 0.13875937461853027,
+  "party1": {
+   "time_s": 0.00429087,
+   "party0_MB": 0.0,
+   "rounds": 0,
+   "global_MB": 0.0,
+   "online": null,
+   "prep": null
+  }
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 314.758,
+    "party0_MB": 62696.9,
+    "rounds": 576327,
+    "global_MB": 497505.0,
+    "online": {
+     "time_s": 0.312848,
+     "MB": 6.9673,
+     "rounds": 448
+    },
+    "prep": {
+     "time_s": 314.435,
+     "MB": 62689.9,
+     "rounds": 575879
+    },
+    "wall_s": 314.9215805530548,
+    "party1": {
+     "time_s": 314.757,
+     "party0_MB": 62115.5,
+     "rounds": 261970,
+     "global_MB": 497505.0,
+     "online": {
+      "time_s": 0.310126,
+      "MB": 0.995328,
+      "rounds": 64
+     },
+     "prep": {
+      "time_s": 314.435,
+      "MB": 62114.5,
+      "rounds": 261906
+     }
+    }
+   },
+   "online": {
+    "time_s": 261.828,
+    "party0_MB": 49533.4,
+    "rounds": 439904,
+    "global_MB": 393061.0,
+    "online": {
+     "time_s": 0.105709,
+     "MB": 6.12534,
+     "rounds": 462
+    },
+    "prep": {
+     "time_s": 261.714,
+     "MB": 49527.3,
+     "rounds": 439442
+    },
+    "wall_s": 261.98816084861755,
+    "party1": {
+     "time_s": 261.828,
+     "party0_MB": 49075.4,
+     "rounds": 205679,
+     "global_MB": 393061.0,
+     "online": {
+      "time_s": 0.116076,
+      "MB": 0.875048,
+      "rounds": 66
+     },
+     "prep": {
+      "time_s": 261.703,
+      "MB": 49074.5,
+      "rounds": 205613
+     }
+    }
+   },
+   "jstar": 1
+  }
+ ],
+ "attempts": 4,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}

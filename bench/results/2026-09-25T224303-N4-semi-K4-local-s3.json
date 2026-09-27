@@ -1,0 +1,69 @@
+{
+ "config": {
+  "N": 4,
+  "protocol": "semi",
+  "K": 4,
+  "net": "local",
+  "seed": 3,
+  "debug": false,
+  "tag": ""
+ },
+ "when": "2026-09-25T22:43:03",
+ "git": "a0748e1",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 0.00172161,
+  "party0_MB": 0.0,
+  "rounds": 0,
+  "global_MB": 0.0,
+  "online": null,
+  "prep": null,
+  "wall_s": 0.10994410514831543
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 82.9776,
+    "party0_MB": 24478.5,
+    "rounds": 336209,
+    "global_MB": 97347.2,
+    "online": {
+     "time_s": 0.359764,
+     "MB": 15.893,
+     "rounds": 156
+    },
+    "prep": {
+     "time_s": 82.6145,
+     "MB": 24462.6,
+     "rounds": 336053
+    },
+    "wall_s": 83.09407782554626
+   },
+   "online": {
+    "time_s": 25.3269,
+    "party0_MB": 7432.36,
+    "rounds": 102608,
+    "global_MB": 29557.3,
+    "online": {
+     "time_s": 0.107862,
+     "MB": 4.88215,
+     "rounds": 186
+    },
+    "prep": {
+     "time_s": 25.2158,
+     "MB": 7427.47,
+     "rounds": 102422
+    },
+    "wall_s": 25.447566032409668
+   },
+   "jstar": 1
+  }
+ ],
+ "attempts": 4,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}

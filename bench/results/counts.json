@@ -1,0 +1,154 @@
+{
+ "base": {
+  "w1_phase": {
+   "bit_triples": 3317760,
+   "edabit_bits": 3120640,
+   "dabits": 27648,
+   "integer_opens": 30720,
+   "and_equivalents": 6466048,
+   "raw": {
+    "strict edabits of length 20": 1280,
+    "strict edabits of length 71": 1536,
+    "strict edabits of length 54": 1536,
+    "integer opens": 30720,
+    "strict edabits of length 41": 27648,
+    "strict edabits of length 64": 27648,
+    "bit triples": 3317760,
+    "integer dabits": 27648,
+    "bit opens": 3456,
+    "virtual machine rounds": 30
+   }
+  },
+  "test_phase": {
+   "bit_triples": 1044726,
+   "edabit_bits": 914233,
+   "dabits": 8707,
+   "integer_opens": 9988,
+   "and_equivalents": 1967666,
+   "raw": {
+    "strict edabits of length 41": 8705,
+    "strict edabits of length 64": 8707,
+    "integer opens": 9988,
+    "bit triples": 1044726,
+    "integer dabits": 8707,
+    "bit opens": 1104,
+    "strict edabits of length 40": 2,
+    "integer triples": 2,
+    "integer simple multiplications": 2,
+    "virtual machine rounds": 31
+   }
+  },
+  "total": {
+   "bit_triples": 4362486,
+   "edabit_bits": 4034873,
+   "dabits": 36355,
+   "integer_opens": 40708,
+   "and_equivalents": 8433714
+  }
+ },
+ "min": {
+  "w1_phase": {
+   "bit_triples": 204288,
+   "edabit_bits": 761344,
+   "dabits": 9216,
+   "integer_opens": 12288,
+   "and_equivalents": 974848,
+   "raw": {
+    "strict edabits of length 20": 1280,
+    "strict edabits of length 71": 1536,
+    "strict edabits of length 54": 1536,
+    "integer opens": 12288,
+    "strict edabits of length 41": 4608,
+    "strict edabits of length 25": 3072,
+    "bit triples": 204288,
+    "integer dabits": 9216,
+    "bit opens": 1152,
+    "strict edabits of length 55": 1536,
+    "strict edabits of length 9": 1536,
+    "strict edabits of length 45": 1536,
+    "strict edabits of length 10": 3072,
+    "strict edabits of length 46": 1536,
+    "strict edabits of length 6": 1536,
+    "virtual machine rounds": 38
+   }
+  },
+  "test_phase": {
+   "bit_triples": 292392,
+   "edabit_bits": 533661,
+   "dabits": 8707,
+   "integer_opens": 9988,
+   "and_equivalents": 834760,
+   "raw": {
+    "strict edabits of length 41": 8705,
+    "strict edabits of length 21": 2560,
+    "integer opens": 9988,
+    "bit triples": 292392,
+    "integer dabits": 8707,
+    "bit opens": 1104,
+    "strict edabits of length 20": 6144,
+    "strict edabits of length 40": 2,
+    "strict edabits of length 12": 3,
+    "integer triples": 2,
+    "integer simple multiplications": 2,
+    "virtual machine rounds": 34
+   }
+  },
+  "total": {
+   "bit_triples": 496680,
+   "edabit_bits": 1295005,
+   "dabits": 17923,
+   "integer_opens": 22276,
+   "and_equivalents": 1809608
+  }
+ },
+ "opt": {
+  "w1_phase": {
+   "bit_triples": 213504,
+   "edabit_bits": 318976,
+   "dabits": 12288,
+   "integer_opens": 4608,
+   "and_equivalents": 544768,
+   "raw": {
+    "strict edabits of length 20": 1280,
+    "strict edabits of length 71": 1536,
+    "strict edabits of length 54": 1536,
+    "integer opens": 4608,
+    "strict edabits of length 26": 1536,
+    "strict edabits of length 40": 1536,
+    "bit triples": 213504,
+    "integer dabits": 12288,
+    "bit opens": 1536,
+    "virtual machine rounds": 88
+   }
+  },
+  "test_phase": {
+   "bit_triples": 292392,
+   "edabit_bits": 173213,
+   "dabits": 8707,
+   "integer_opens": 4100,
+   "and_equivalents": 474312,
+   "raw": {
+    "strict edabits of length 22": 1280,
+    "strict edabits of length 40": 2818,
+    "integer opens": 4100,
+    "integer dabits": 8707,
+    "bit triples": 292392,
+    "bit opens": 1104,
+    "strict edabits of length 21": 1536,
+    "strict edabits of length 12": 3,
+    "integer triples": 2,
+    "integer simple multiplications": 2,
+    "strict edabits of length 41": 1,
+    "virtual machine rounds": 32
+   }
+  },
+  "total": {
+   "bit_triples": 505896,
+   "edabit_bits": 492189,
+   "dabits": 20995,
+   "integer_opens": 8708,
+   "and_equivalents": 1019080
+  }
+ },
+ "source": "MP-SPDZ 0.4.3 compiler, 'Program requires at most', programs compiled with K = 1"
+}

@@ -37,7 +37,7 @@ Probabilities per slot (one nonce prescribed on one slot costs l * log2(1048183)
 Weights: with s' := s - m the character dimension, per-row |W_r - 1| <= W(s', d), the minimum of
     Holder:   min_theta Lambda(theta L)^s' Lambda((1 - theta) L_d)^d,  L = floor(256/s'), L_d = floor(256/d)
     s' = 1:    q^d 2^-3598                         (Lemma "one dependent slot")
-    s' = 2, 3: q^d Sigma, Sigma <= 2^-53.9, 2^-23.06   (the s = 2, 3 certificates)
+    s' = 2, 3: q^d Sigma, Sigma <= 2^-54.3, 2^-23.06   (the s = 2, 3 certificates)
 and over six rows delta <= (1 + W)^6 - 1; independently delta <= min(q^{6(|Z|+m)} 2^7681, 2^22092)
 (Lemma "counting bound", with the same symmetrisation).
 Count: C(256, s) * s! / (|Z|! |A|! |B|! |P|!).
@@ -86,7 +86,7 @@ def condF(c):
     return float(m + math.log2((2.0 ** (v - m)).sum()))
 
 ths = np.linspace(0.0, 1.0, 201)
-CERT = {2: -53.9, 3: -23.06}
+CERT = {2: -54.3, 3: -23.06}
 
 @functools.lru_cache(maxsize=None)
 def weight(s, d):
@@ -166,7 +166,7 @@ if __name__ == "__main__":
 # ---- Part 2: coset slot sets (Lemma "what the coset case proves"), with the same corrections.
 # Weight per row: q^d * eps_s, eps_s = log2 of the last column of Table "coset constants";
 # for S = a single slot eps_1 = 2^-3598.8.  Over six rows (1 + x)^6 - 1, capped by the counting bound.
-EPS = {1: -3598.8, 2: -1758.8, 4: -850.1, 8: -397.2, 16: -166.4, 32: -50.8, 64: -5.8}
+EPS = {1: -3598.8, 2: -1758.8, 4: -850.1, 8: -397.2, 16: -166.4, 32: -50.8, 64: -5.74}
 def coset_mass():
     out = {}
     for s, eps in EPS.items():

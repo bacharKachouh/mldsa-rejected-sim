@@ -1,0 +1,116 @@
+# Online phase of the open-w1 construction (paper, Section 9), MINIMAL circuit: F_test with every
+# comparison at the width its operands actually need (same function and reveals as mldsa_online.mpc).
+# For each of the K attempts of the batch, in parallel:
+#   z-test:    ||y + c*s1||_inf < gamma1 - beta
+#   r0-test:   ||r0 - c*s2||_inf < gamma2 - beta          (r0 = LowBits(w) from the offline phase)
+#   hint test: weight of MakeHint(-c*t0, w - c*s2 + c*t0) <= omega, via the public per-coefficient
+#              thresholds hi, lo computed on the host from public w1 and c*t0 (bench/mldsa_host.py)
+# Reveals only j* (index of the first accepting attempt, -1 if none) and z of that attempt.
+# All local (communication-free) arithmetic first, then one vectorised block of comparisons.
+#
+# Args: K. Public input per attempt, in order: c (n ints), hi (k*n), lo (k*n).
+program.use_edabit(True)
+
+K = int(program.args[1])
+
+q, n, k, l = 8380417, 256, 6, 5
+gamma1, gamma2, beta, omega = 1 << 19, 261888, 196, 55
+KEYLEN = l * n + k * n
+SLOT = l * n + k * n
+
+_, (s1,) = sint.read_from_file(0, 1, size=l * n)
+_, (s2,) = sint.read_from_file(l * n, 1, size=k * n)
+
+s1ext = sint.Array(l * 2 * n)
+s2ext = sint.Array(k * 2 * n)
+for j in range(l):
+    v = s1.get_vector(j * n, n)
+    s1ext.assign_vector(-v, j * 2 * n)
+    s1ext.assign_vector(v, j * 2 * n + n)
+for j in range(k):
+    v = s2.get_vector(j * n, n)
+    s2ext.assign_vector(-v, j * 2 * n)
+    s2ext.assign_vector(v, j * 2 * n + n)
+
+c = cint.Array(n)
+hi = cint.Array(K * k * n)
+lo = cint.Array(K * k * n)
+zall = sint.Array(K * l * n)
+r0pall = sint.Array(K * k * n)
+prod = sint.Array(n)
+
+
+def negacyclic(ext, row):
+    """c * (row-th polynomial held in ext) over Z; public c, secret polynomial: local only."""
+    prod.assign_all(0)
+    @for_range(n)
+    def _(t):
+        prod.assign_vector(prod.get_vector() + c[t] * ext.get_vector(row * 2 * n + n - t, n))
+    return prod.get_vector()
+
+
+# local phase: z = y + c*s1 and r0' = r0 - c*s2 for every attempt
+@for_range(K)
+def _(att):
+    @for_range(n)
+    def _(i):
+        c[i] = public_input()
+    @for_range(k * n)
+    def _(i):
+        hi[att * (k * n) + i] = public_input()
+    @for_range(k * n)
+    def _(i):
+        lo[att * (k * n) + i] = public_input()
+
+    base = regint(KEYLEN) + att * SLOT
+    _, (y,) = sint.read_from_file(base, 1, size=l * n)
+    _, (r0,) = sint.read_from_file(base + l * n, 1, size=k * n)
+    for j in range(l):
+        zall.assign_vector(y.get_vector(j * n, n) + negacyclic(s1ext, j), att * (l * n) + j * n)
+    for i in range(k):
+        r0pall.assign_vector(r0.get_vector(i * n, n) - negacyclic(s2ext, i), att * (k * n) + i * n)
+
+# one vectorised block of comparisons over the whole batch
+z = zall.get_vector()
+r0p = r0pall.get_vector()
+zbad = sint.Array(K * l * n)            # |z| < gamma1 + beta < 2^20: 21 bits signed
+zbad.assign(z.greater_equal(gamma1 - beta, bit_length=21) + z.less_equal(-(gamma1 - beta), bit_length=21))
+rbad = sint.Array(K * k * n)            # |r0'| <= gamma2 + beta < 2^18.01; thresholds < 2^19: 20 bits signed
+rbad.assign(r0p.greater_equal(gamma2 - beta, bit_length=20) + r0p.less_equal(-(gamma2 - beta), bit_length=20))
+hbit = sint.Array(K * k * n)
+hbit.assign(r0p.greater_than(hi.get_vector(), bit_length=20) + r0p.less_equal(lo.get_vector(), bit_length=20))
+
+# per-attempt counts (local sums), then the three tests vectorised over attempts
+nz = sint.Array(K)
+nr = sint.Array(K)
+nh = sint.Array(K)
+for att in range(K):
+    nz[att] = zbad.get_vector(att * (l * n), l * n).sum()
+    nr[att] = rbad.get_vector(att * (k * n), k * n).sum()
+    nh[att] = hbit.get_vector(att * (k * n), k * n).sum()
+acc = (nz.get_vector().equal(0, bit_length=12) * nr.get_vector().equal(0, bit_length=12)
+       * nh.get_vector().less_equal(omega, bit_length=12))       # counts <= 1536 < 2^11
+
+# first accepting attempt: f_j = acc_j * prod_{i<j} (1 - acc_i), prefix product in log2(K) rounds;
+# reveals nothing about attempts after j*
+pre = sint.Array(K)
+pre.assign(1 - acc)
+d = 1
+while d < K:
+    upd = pre.get_vector(d, K - d) * pre.get_vector(0, K - d)
+    pre.assign_vector(upd, d)
+    d *= 2
+f = acc
+if K > 1:
+    nb = sint.Array(K)
+    nb[0] = sint(1)
+    nb.assign_vector(pre.get_vector(0, K - 1), 1)
+    f = acc * nb.get_vector()
+jplus = (f * cint(regint.inc(K, 1))).sum()
+jstar = jplus.reveal() - 1
+print_ln('JSTAR %s', jstar)
+
+@if_(jstar >= 0)
+def _():
+    zsel = zall.get_vector(regint(jstar) * (l * n), l * n)
+    print_ln('Z %s', zsel.reveal())

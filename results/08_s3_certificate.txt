@@ -1,7 +1,4 @@
-# python scripts/08_s3_certificate.py combine   (20 chunks, run 2026-09-27)
 chunks 20, contiguous cover of 0..256: True; sets 2763520 (expected 2763520)
-(iii) worst exact value <= 2^-24.19 at S=(19, 83, 147)
-(i)   <= 2^-23.93   (ii) <= 2^-102.10
-CERTIFIED: Sigma_S <= 2^-23.06 for every three-element slot set S
-
-[exited with code 0]
+(iii) worst exact value <= 2^-24.196 at S=(19, 83, 147)
+(i)   <= 2^-23.937   (ii) <= 2^-102.101
+CERTIFIED: Sigma_S <= 2^-23.061 for every three-element slot set S

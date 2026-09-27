@@ -1,0 +1,157 @@
+"""
+report.py -- generate bench/RESULTS.md from bench/results/*.json. Never edit RESULTS.md by hand.
+
+Cost components (per party, party 0's traffic as reported by MP-SPDZ):
+  total        full run (real preprocessing)
+  online       same configuration with insecure fake preprocessing (-F)
+  preprocessing = total - online
+Per attempt = batch cost / attempts in the batch; per signature = sum over the batches of a run.
+"""
+import glob, json, os, statistics, sys
+from collections import defaultdict
+
+_here = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _here)
+import cost_model_v2 as cm2                                     # noqa: E402
+
+PRIOR_ART = [   # figures as reported by the cited papers
+    ("Mithril (ePrint 2026/013)", "dishonest majority, game-based", "<= 6", "4 online (+2 offline)",
+     "0.02-1.05 MB (ML-DSA-44)"),
+    ("Quorus (ePrint 2025/1163)", "honest majority, UC", "any", "19-149 expected", "2.2-14.5 MB"),
+    ("TALUS (arXiv 2603.22109v5)", "static T-1; TEE / MPC profiles", "any / >= 2T-1", "1 (TEE) / 2 (MPC)",
+     "not extracted"),
+]
+
+
+def load():
+    recs = []
+    for p in sorted(glob.glob(os.path.join(_here, "results", "*.json"))):
+        with open(p) as f:
+            r = json.load(f)
+        if r.get("verified"):
+            recs.append(r)
+    return recs
+
+
+def run_cost(r):
+    """(MB per party, rounds, seconds) summed over batches, split by phase."""
+    out = {}
+    for ph in ("offline", "online"):
+        out[ph] = dict(MB=sum(b[ph]["party0_MB"] for b in r["batches"]),
+                       rounds=sum(b[ph]["rounds"] for b in r["batches"]),
+                       s=sum(b[ph]["time_s"] for b in r["batches"]))
+    out["attempts"] = r["attempts"]
+    return out
+
+
+def med(xs):
+    return statistics.median(xs) if xs else None
+
+
+def fmt_mb(x):
+    if x is None:
+        return "-"
+    return f"{x/1000:.2f} GB" if x >= 1000 else (f"{x:.1f} MB" if x >= 1 else f"{x*1000:.0f} kB")
+
+
+def group(recs):
+    g = defaultdict(list)
+    for r in recs:
+        c = r["config"]
+        g[(c["protocol"], c["N"], c["K"], c["prep"], c["net"])].append(run_cost(r))
+    return g
+
+
+def per_attempt_table(g, proto, K, net):
+    rows = ["| N | w1-phase total | test-phase total | total / attempt | of which preprocessing | online / attempt | online rounds / batch | time / attempt | runs |",
+            "|---|---|---|---|---|---|---|---|---|"]
+    for N in (2, 4, 8, 16):
+        full = g.get((proto, N, K, "real", net), [])
+        fake = g.get((proto, N, K, "fake", net), [])
+        if not full:
+            rows.append(f"| {N} | not run | | | | | | | 0 |")
+            continue
+        off = med([c["offline"]["MB"] / c["attempts"] for c in full])
+        on = med([c["online"]["MB"] / c["attempts"] for c in full])
+        tot = off + on
+        onl = med([(c["offline"]["MB"] + c["online"]["MB"]) / c["attempts"] for c in fake]) if fake else None
+        prep = tot - onl if onl is not None else None
+        rnd = med([(c["offline"]["rounds"] + c["online"]["rounds"]) * K / c["attempts"] for c in (fake or full)])
+        t = med([(c["offline"]["s"] + c["online"]["s"]) / c["attempts"] for c in full])
+        rows.append(f"| {N} | {fmt_mb(off)} | {fmt_mb(on)} | **{fmt_mb(tot)}** | {fmt_mb(prep)} | {fmt_mb(onl)} "
+                    f"| {rnd:.0f} | {t:.1f} s | {len(full)} |")
+    return "\n".join(rows)
+
+
+def per_signature_table(g, proto, net):
+    rows = ["| N | batch K | total / signature | attempts consumed (median) | time / signature | runs |",
+            "|---|---|---|---|---|---|"]
+    for N in (2, 4, 8, 16):
+        for K in (8, 24):
+            full = g.get((proto, N, K, "real", net), [])
+            if not full:
+                continue
+            tot = med([c["offline"]["MB"] + c["online"]["MB"] for c in full])
+            att = med([c["attempts"] for c in full])
+            t = med([c["offline"]["s"] + c["online"]["s"] for c in full])
+            rows.append(f"| {N} | {K} | **{fmt_mb(tot)}** | {att:.0f} | {t:.0f} s | {len(full)} |")
+    return "\n".join(rows) if len(rows) > 2 else "_No per-signature runs recorded._"
+
+
+def model_table(g, proto):
+    per_att_ands = cm2.ONLINE_PER_ATTEMPT + cm2.OFFLINE_PER_ATTEMPT
+    rows = ["| N | measured total / attempt | model, optimistic (20 B/AND/pair) | model, conservative (128 B/AND/pair) |",
+            "|---|---|---|---|"]
+    for N in (2, 4, 8, 16):
+        full = g.get((proto, N, 4, "real", "local"), [])
+        meas = med([(c["offline"]["MB"] + c["online"]["MB"]) / c["attempts"] for c in full]) if full else None
+        opt = per_att_ands * 20 * (N - 1) / 1e6
+        con = per_att_ands * 128 * (N - 1) / 1e6
+        rows.append(f"| {N} | {fmt_mb(meas)} | {fmt_mb(opt)} | {fmt_mb(con)} |")
+    return "\n".join(rows)
+
+
+def main():
+    recs = load()
+    g = group(recs)
+    out = ["# MPC baseline benchmark — results",
+           "",
+           "Generated by `bench/report.py` from `bench/results/*.json`; do not edit by hand.",
+           f"Verified runs: {len(recs)}. Every run produced a signature accepted by `core.verify`.",
+           "",
+           "**What is measured.** The ideal functionalities of the open-w1 construction (paper, Section 9) "
+           "run as real MPC in MP-SPDZ 0.4.3: the *w1 phase* (F_nonce + F_w1, message-independent) and "
+           "the *test phase* (F_test). Traffic is data sent by one party (party 0) as reported by "
+           "MP-SPDZ. *Preprocessing* is the full run minus the same configuration run with insecure "
+           "fake preprocessing (`-F`); *online* is the latter.",
+           "",
+           "**Baseline circuit.** Untuned: every comparison at MP-SPDZ's default 64-bit width, "
+           "HighBits by 16 threshold comparisons after an explicit reduction mod q, all three tests "
+           "evaluated for every attempt. Optimisations are out of scope for this baseline "
+           "(spec §2).",
+           ""]
+    for proto, title in (("mascot", "MASCOT (malicious, dishonest majority with abort)"),
+                         ("semi", "Semi-honest OT (reference lower bound, not the target security)")):
+        out += [f"## {title}", "",
+                "### Per attempt (batch K = 4, localhost)", "", per_attempt_table(g, proto, 4, "local"), "",
+                "### Per attempt (batch K = 4, simulated WAN: 25 ms each way, 1 Gbit/s)", "",
+                per_attempt_table(g, proto, 4, "wan"), "",
+                "### Per signature (localhost)", "", per_signature_table(g, proto, "local"), ""]
+    out += ["## Measured versus the cost model (MASCOT, per attempt, localhost)", "",
+            "Model: `bench/cost_model_v2.py`, "
+            f"{cm2.ONLINE_PER_ATTEMPT + cm2.OFFLINE_PER_ATTEMPT:,} ANDs per attempt, per-party traffic "
+            "= ANDs × bytes per AND per pair × (N − 1).", "",
+            model_table(g, "mascot"), "",
+            "## Other threshold ML-DSA schemes (as published; not re-measured)", "",
+            "| Scheme | Corruption model | Parties | Online rounds / signature | Per-party traffic / signature |",
+            "|---|---|---|---|---|"]
+    out += [f"| {a} | {b} | {c} | {d} | {e} |" for a, b, c, d, e in PRIOR_ART]
+    out += ["", "Not like-for-like: parameter sets, security models and networks differ; see "
+            "the paper.", ""]
+    with open(os.path.join(_here, "RESULTS.md"), "w", encoding="utf-8") as f:
+        f.write("\n".join(out))
+    print(f"RESULTS.md written from {len(recs)} verified runs")
+
+
+if __name__ == "__main__":
+    main()

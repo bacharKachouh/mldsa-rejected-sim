@@ -1,0 +1,93 @@
+# Offline phase of the open-w1 construction (paper, Section 9), baseline circuit:
+#   F_nonce: y uniform on the FIPS box [-gamma1+1, gamma1] (one random 20-bit integer per coefficient)
+#   F_w1:    w = A*y mod q (A public), w1 = HighBits(w) with the FIPS top-cell rule
+# Reveals w1 of every attempt and nothing else. y and r0 = LowBits(w) stay secret and are
+# persisted for the online program at position KEYLEN + j*SLOT.
+# The K attempts are processed in parallel, as in the construction: all local (communication-free)
+# arithmetic first, then one vectorised block of comparisons over the whole batch.
+#
+# Args: K [debug]. Public input (Programs/Public-Input/<progname>): A as k*l*n centered integers.
+# 'debug' additionally reveals y and r0 for the correctness checks; never used for measurements.
+program.use_edabit(True)
+program.set_bit_length(64)                  # baseline: MP-SPDZ default width for every comparison
+
+K = int(program.args[1])
+debug = 'debug' in program.args[2:]
+
+q, n, k, l = 8380417, 256, 6, 5
+gamma1, gamma2 = 1 << 19, 261888
+alpha = 2 * gamma2
+KEYLEN = l * n + k * n
+SLOT = l * n + k * n
+OFFSET = q * (1 << 29)                     # multiple of q making A*y positive (|A*y| < 2^51.3)
+S = 54                                      # w_off < 2^53.1 < 2^S
+M = -(-(1 << S) // q)                       # ceil(2^S / q)
+TRUNC_K = 85                                # bit length of w_off * M
+
+A = cint.Array(k * l * n)
+@for_range(k * l * n)
+def _(i):
+    A[i] = public_input()
+
+# F_nonce for the whole batch
+yall = sint.Array(K * l * n)
+yall.assign(sint.get_random_int(20, size=K * l * n) - (gamma1 - 1))   # exactly uniform: 2*gamma1 = 2^20
+
+# local: w_int = A*y over Z for every attempt and row
+yext = sint.Array(l * 2 * n)                # per row j: [-y_j | y_j], for negacyclic shifts
+wacc = sint.Array(n)
+wall = sint.Array(K * k * n)
+
+@for_range(K)
+def _(att):
+    sint.write_to_file([yall.get_vector(att * (l * n), l * n)], position=regint(KEYLEN) + att * SLOT)
+    for j in range(l):
+        yj = yall.get_vector(att * (l * n) + j * n, n)
+        yext.assign_vector(-yj, j * 2 * n)
+        yext.assign_vector(yj, j * 2 * n + n)
+    for i in range(k):
+        wacc.assign_all(0)
+        @for_range(l * n)
+        def _(jt):
+            j = jt // n
+            t = jt % n
+            shifted = yext.get_vector(j * 2 * n + n - t, n)     # coefficients of X^t * y_j
+            wacc.assign_vector(wacc.get_vector() + A[(i * l + j) * n + t] * shifted)
+        wall.assign_vector(wacc.get_vector(), (att * k + i) * n)
+
+# one vectorised block over K*k*n coefficients
+# reduce mod q: Q' = trunc(w_off * M / 2^S) is floor(w_off / q) + {0, 1, 2}
+w_off = wall.get_vector() + OFFSET
+Qp = (w_off * M).round(TRUNC_K, S, nearest=False, signed=False)
+rr = w_off - q * Qp                                             # in [-2q, q)
+rr = rr + q * (rr < 0)
+rr = rr + q * (rr < 0)                                          # now in [0, q)
+
+# FIPS Decompose by thresholds: b_t = [rr > t*alpha - gamma2], t = 1..16
+bsum = sint(0, size=K * k * n)
+w1 = sint(0, size=K * k * n)
+b16 = None
+for t in range(1, 17):
+    b = rr > (t * alpha - gamma2)
+    bsum = bsum + b
+    if t <= 15:
+        w1 = w1 + b
+    else:
+        b16 = b
+w1 = w1 - 15 * b16
+r0all = sint.Array(K * k * n)
+r0all.assign(rr - alpha * bsum - b16)
+
+w1pub = cint.Array(K * k * n)
+w1pub.assign(w1.reveal())
+
+@for_range(K)
+def _(att):
+    sint.write_to_file([r0all.get_vector(att * (k * n), k * n)],
+                       position=regint(KEYLEN) + att * SLOT + l * n)
+    for i in range(k):
+        print_ln('W1 %s %s %s', att, i, w1pub.get_vector((att * k + i) * n, n))
+        if debug:
+            print_ln('R %s %s %s', att, i, r0all.get_vector((att * k + i) * n, n).reveal())
+    if debug:
+        print_ln('Y %s %s', att, yall.get_vector(att * (l * n), l * n).reveal())

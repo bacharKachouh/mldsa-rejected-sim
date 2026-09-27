@@ -1,0 +1,136 @@
+# Online phase (F_test), OPTIMISED circuit. Same function and reveals as mldsa_online_min.mpc.
+# Change: each tested value is opened ONCE under a statistical mask R (edaBit with K known low bits
+# plus 40 random high bits), and all its comparisons against public thresholds reuse that opening:
+# for a = x - T + 2^(K-1) in [0, 2^K), bit K-1 of a is [x >= T], and
+#   a mod 2^K = (P - r) mod 2^K with P = (c - T) mod 2^K public, r the K low mask bits,
+# so bit K-1 = P_{K-1} xor r_{K-1} xor [P mod 2^(K-1) < r mod 2^(K-1)] (one carry chain).
+# MP-SPDZ's own comparison does the same per comparison with a FRESH mask; here z shares one mask
+# between its 2 comparisons and r0' shares one between its 4.
+#
+# Args: K. Public input per attempt, in order: c (n ints), hi (k*n), lo (k*n).
+from Compiler import comparison
+program.use_edabit(True)
+
+K = int(program.args[1])
+
+q, n, k, l = 8380417, 256, 6, 5
+gamma1, gamma2, beta, omega = 1 << 19, 261888, 196, 55
+KEYLEN = l * n + k * n
+SLOT = l * n + k * n
+SEC = program.security
+
+
+def masked_open(x, width):
+    """Open x + 2^(width-1) + r + 2^width * r_hi; return (opening, the width mask bits r)."""
+    size = x.size
+    r, rbits = sint.get_edabit(width, True, size=size)
+    r_hi = sint.get_edabit(SEC, True, size=size)[0]
+    masked = (x + (1 << (width - 1)) + r + (r_hi << width)).reveal()
+    return masked, rbits
+
+
+def geq(opening, rbits, width, T):
+    """[x >= T] as an sint bit, given opening = masked_open(x, width); needs x - T in [-2^(width-1), 2^(width-1))."""
+    P = (opening - T) % (1 << width)
+    pbits = rbits[0].bit_decompose_clear(P, width - 1)
+    borrow = comparison.BitLTL_raw(pbits, rbits[:width - 1])
+    msb = rbits[width - 1].bit_xor(P >> (width - 1)).bit_xor(borrow)
+    return sintbit.conv(msb)
+
+
+_, (s1,) = sint.read_from_file(0, 1, size=l * n)
+_, (s2,) = sint.read_from_file(l * n, 1, size=k * n)
+
+s1ext = sint.Array(l * 2 * n)
+s2ext = sint.Array(k * 2 * n)
+for j in range(l):
+    v = s1.get_vector(j * n, n)
+    s1ext.assign_vector(-v, j * 2 * n)
+    s1ext.assign_vector(v, j * 2 * n + n)
+for j in range(k):
+    v = s2.get_vector(j * n, n)
+    s2ext.assign_vector(-v, j * 2 * n)
+    s2ext.assign_vector(v, j * 2 * n + n)
+
+c = cint.Array(n)
+hi = cint.Array(K * k * n)
+lo = cint.Array(K * k * n)
+zall = sint.Array(K * l * n)
+r0pall = sint.Array(K * k * n)
+prod = sint.Array(n)
+
+
+def negacyclic(ext, row):
+    """c * (row-th polynomial held in ext) over Z; public c, secret polynomial: local only."""
+    prod.assign_all(0)
+    @for_range(n)
+    def _(t):
+        prod.assign_vector(prod.get_vector() + c[t] * ext.get_vector(row * 2 * n + n - t, n))
+    return prod.get_vector()
+
+
+@for_range(K)
+def _(att):
+    @for_range(n)
+    def _(i):
+        c[i] = public_input()
+    @for_range(k * n)
+    def _(i):
+        hi[att * (k * n) + i] = public_input()
+    @for_range(k * n)
+    def _(i):
+        lo[att * (k * n) + i] = public_input()
+
+    base = regint(KEYLEN) + att * SLOT
+    _, (y,) = sint.read_from_file(base, 1, size=l * n)
+    _, (r0,) = sint.read_from_file(base + l * n, 1, size=k * n)
+    for j in range(l):
+        zall.assign_vector(y.get_vector(j * n, n) + negacyclic(s1ext, j), att * (l * n) + j * n)
+    for i in range(k):
+        r0pall.assign_vector(r0.get_vector(i * n, n) - negacyclic(s2ext, i), att * (k * n) + i * n)
+
+# z in (-gamma1-beta, gamma1+beta]: z - T within +-2^21 for both thresholds -> width 22
+z = zall.get_vector()
+zo, zr = masked_open(z, 22)
+zbad = sint.Array(K * l * n)
+zbad.assign(geq(zo, zr, 22, gamma1 - beta) + 1 - geq(zo, zr, 22, -(gamma1 - beta) + 1))
+
+# r0' in [-gamma2-beta, gamma2+beta]; |hi|, |lo| < 462593: r0' - T within +-2^20 -> width 21
+r0p = r0pall.get_vector()
+ro, rr_ = masked_open(r0p, 21)
+rbad = sint.Array(K * k * n)
+rbad.assign(geq(ro, rr_, 21, gamma2 - beta) + 1 - geq(ro, rr_, 21, -(gamma2 - beta) + 1))
+hbit = sint.Array(K * k * n)
+hbit.assign(geq(ro, rr_, 21, hi.get_vector() + 1) + 1 - geq(ro, rr_, 21, lo.get_vector() + 1))
+
+nz = sint.Array(K)
+nr = sint.Array(K)
+nh = sint.Array(K)
+for att in range(K):
+    nz[att] = zbad.get_vector(att * (l * n), l * n).sum()
+    nr[att] = rbad.get_vector(att * (k * n), k * n).sum()
+    nh[att] = hbit.get_vector(att * (k * n), k * n).sum()
+acc = (nz.get_vector().equal(0, bit_length=12) * nr.get_vector().equal(0, bit_length=12)
+       * nh.get_vector().less_equal(omega, bit_length=12))
+
+pre = sint.Array(K)
+pre.assign(1 - acc)
+d = 1
+while d < K:
+    upd = pre.get_vector(d, K - d) * pre.get_vector(0, K - d)
+    pre.assign_vector(upd, d)
+    d *= 2
+f = acc
+if K > 1:
+    nb = sint.Array(K)
+    nb[0] = sint(1)
+    nb.assign_vector(pre.get_vector(0, K - 1), 1)
+    f = acc * nb.get_vector()
+jplus = (f * cint(regint.inc(K, 1))).sum()
+jstar = jplus.reveal() - 1
+print_ln('JSTAR %s', jstar)
+
+@if_(jstar >= 0)
+def _():
+    zsel = zall.get_vector(regint(jstar) * (l * n), l * n)
+    print_ln('Z %s', zsel.reveal())

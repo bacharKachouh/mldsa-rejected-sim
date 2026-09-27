@@ -1,0 +1,126 @@
+{
+ "config": {
+  "N": 2,
+  "protocol": "lowgear",
+  "K": 4,
+  "net": "local",
+  "seed": 1,
+  "debug": false,
+  "circuit": "opt",
+  "tag": "-opt"
+ },
+ "when": "2026-09-26T03:50:43",
+ "git": "1ae4584",
+ "mpspdz": "0.4.3",
+ "setup": {
+  "time_s": 0.0736817,
+  "party0_MB": 0.962838,
+  "rounds": 13,
+  "global_MB": 0.962954,
+  "online": {
+   "time_s": 0.00112301,
+   "MB": 0.045088,
+   "rounds": 5
+  },
+  "prep": {
+   "time_s": 0.0703016,
+   "MB": 0.91775,
+   "rounds": 8
+  },
+  "wall_s": 0.20554208755493164,
+  "party1": {
+   "time_s": 0.0736907,
+   "party0_MB": 0.000116,
+   "rounds": 13,
+   "global_MB": 0.962954,
+   "online": {
+    "time_s": 0.00125614,
+    "MB": 3.2e-05,
+    "rounds": 5
+   },
+   "prep": {
+    "time_s": 0.0700513,
+    "MB": 8.4e-05,
+    "rounds": 8
+   }
+  }
+ },
+ "batches": [
+  {
+   "offline": {
+    "time_s": 69.7459,
+    "party0_MB": 3307.27,
+    "rounds": 375249,
+    "global_MB": 6614.53,
+    "online": {
+     "time_s": 0.45763,
+     "MB": 0.514836,
+     "rounds": 195
+    },
+    "prep": {
+     "time_s": 69.2833,
+     "MB": 3306.75,
+     "rounds": 375054
+    },
+    "wall_s": 69.87991833686829,
+    "party1": {
+     "time_s": 69.7459,
+     "party0_MB": 3307.27,
+     "rounds": 374836,
+     "global_MB": 6614.53,
+     "online": {
+      "time_s": 0.459686,
+      "MB": 0.514836,
+      "rounds": 195
+     },
+     "prep": {
+      "time_s": 69.2813,
+      "MB": 3306.75,
+      "rounds": 374641
+     }
+    }
+   },
+   "online": {
+    "time_s": 56.6105,
+    "party0_MB": 3112.39,
+    "rounds": 272359,
+    "global_MB": 6224.79,
+    "online": {
+     "time_s": 0.24431,
+     "MB": 0.499106,
+     "rounds": 115
+    },
+    "prep": {
+     "time_s": 56.3601,
+     "MB": 3111.9,
+     "rounds": 272244
+    },
+    "wall_s": 56.75103163719177,
+    "party1": {
+     "time_s": 56.6105,
+     "party0_MB": 3112.39,
+     "rounds": 271916,
+     "global_MB": 6224.79,
+     "online": {
+      "time_s": 0.234855,
+      "MB": 0.499106,
+      "rounds": 115
+     },
+     "prep": {
+      "time_s": 56.3694,
+      "MB": 3111.9,
+      "rounds": 271801
+     }
+    }
+   },
+   "jstar": 1
+  }
+ ],
+ "attempts": 4,
+ "verified": true,
+ "checks": {
+  "w1_matches": 0,
+  "w1_checked": 0,
+  "jstar_matches_ref": null
+ }
+}
