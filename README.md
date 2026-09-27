@@ -54,3 +54,7 @@ the campaign scripts that produced the runs, and the 17 result files the paper q
 Table 2 from those files: gate counts, online traffic and rounds, the semi-honest estimates and
 the malicious optimisation steps. Re-running the measurements needs Docker; see the header of
 `run.py`.
+
+## License
+
+MIT; see `LICENSE`.
