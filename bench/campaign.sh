@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Measurement campaign for bench/RESULTS.md. Usage: bash bench/campaign.sh semi|mascot
+# Measurement campaign (untuned circuit). Usage: bash bench/campaign.sh semi|mascot
 # Each line of the log: config then the driver's one-line summary (or the error).
 set -u
 cd "$(dirname "$0")/.."

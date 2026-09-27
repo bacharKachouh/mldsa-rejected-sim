@@ -48,8 +48,9 @@ per-chunk files of the s = 3 run, so that `combine` can be re-checked without th
 
 `bench/` holds the MP-SPDZ 0.4.3 programs for the secure computations of one signing attempt
 (`bench/mpc/`), the driver that runs them in Docker and checks every signature against the
-reference verifier (`run.py`, `dock.py`, `mldsa_host.py`, `crosscheck.py`), the campaign
-scripts, and the result files quoted in the paper (`bench/results/`). `python bench/counts.py`
-prints the per-attempt gate counts (8 433 714 and 1 019 080 AND equivalents for the baseline and
-optimised circuits) from `results/counts.json`. Re-running the measurements needs Docker; see
-the header of `run.py`.
+reference verifier (`run.py`, `dock.py`, `mldsa_host.py`, `crosscheck.py`, `check_reveals.py`),
+the campaign scripts that produced the runs, and the 17 result files the paper quotes
+(`bench/results/`). `python bench/table2.py` prints every figure of the paper's cost section and
+Table 2 from those files: gate counts, online traffic and rounds, the semi-honest estimates and
+the malicious optimisation steps. Re-running the measurements needs Docker; see the header of
+`run.py`.
