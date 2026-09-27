@@ -1,0 +1,6 @@
+PART R  s=2 certificate, certified: all C(256,2)=32640 slot pairs
+   pairs done  [67s];  largest candidate set 4
+   smallest P over all pairs and all x: 52953088 at S=(3, 7)
+   box part   <= N (2^24/Pmin)^64 <= 2^-90.11
+   tail part  <= 2 tail_up(64) Lambda_up(64) <= 2^-54.32   [tail_up(64) <= 2^-62.34, Lambda_up(64) <= 2^7.03]
+   CERTIFIED: Sigma_S <= 2^-54.32 for every two-element slot set S

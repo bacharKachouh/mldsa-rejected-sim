@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+*.log
+/s3_chunk_*.json
