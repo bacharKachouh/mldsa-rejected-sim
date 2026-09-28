@@ -125,8 +125,8 @@ def run(sym=True, verbose=True):
 
 if __name__ == "__main__":
     saved = dict(CERT)
-    for label, certs in (("no certificate", {}), ("s=2 certificate (Theorem 'unconditional bound')", {2: saved[2]}),
-                         ("s=2 and s=3 certificates", saved)):
+    for label, certs in (("no certificate", {}), ("s=2 certificate only (Remark 'the two-slot certificate alone')", {2: saved[2]}),
+                         ("s=2 and s=3 certificates (Theorem 'unconditional bound')", saved)):
         CERT.clear(); CERT.update(certs); weight.cache_clear()
         tot, per_s, diag = run(True)
         sd = 2.0 ** TAIL + 0.5 * math.sqrt(2.0 ** tot + 2.0 ** diag)

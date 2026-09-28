@@ -19,7 +19,7 @@ The certificate for S is  (iii) + 2^-23.94 + 2^-102.1.  Result (all 2,763,520 se
 about 18 CPU-hours in total): worst (iii) = 2^-24.196, at the eight sets {19,83,147} + 64k and their
 mirror images under i -> 255 - i; hence Sigma_S <= 2^-23.0611 for every S.
 phi is phi_64 = min(1, 64/|a|_c), at least the paper's refined factor, so the bound holds for both.
-The paper's main theorem does not use this certificate; it sharpens the constant.
+The paper's main theorem (Theorem "unconditional bound") uses this certificate.
 Meet in the middle: enumerate (x1,x2) in [-X,X]^2 (66049 pairs), p = x1*C[:,0] + x2*C[:,1] mod q;
 for coordinate 0, x3 must satisfy (p_0 + x3*C[0,2]) mod q in [-X',X']; precompute the sorted
 array of x3*C[0,2] mod q for x3 in [-X,X]; a candidate exists iff some element lies in the arc

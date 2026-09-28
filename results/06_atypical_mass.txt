@@ -15,7 +15,7 @@
    diagonal (averaged over the z-data): 2^-3255.1;  Pr[r > 40] = 2^-209.55
    TOTAL atypical mass 2^-89.88;   E_A SD <= 2^-45.94
 
-== s=2 certificate (Theorem 'unconditional bound')
+== s=2 certificate only (Remark 'the two-slot certificate alone')
    s=  1  largest term 2^ -3664.39   sum 2^ -3664.39
    s=  2  largest term 2^  -190.67   sum 2^  -190.67
    s=  3  largest term 2^  -135.95   sum 2^  -135.95
@@ -31,7 +31,7 @@
    diagonal (averaged over the z-data): 2^-3255.1;  Pr[r > 40] = 2^-209.55
    TOTAL atypical mass 2^-135.95;   E_A SD <= 2^-68.98
 
-== s=2 and s=3 certificates
+== s=2 and s=3 certificates (Theorem 'unconditional bound')
    s=  1  largest term 2^ -3664.39   sum 2^ -3664.39
    s=  2  largest term 2^  -190.67   sum 2^  -190.67
    s=  3  largest term 2^  -230.01   sum 2^  -230.01

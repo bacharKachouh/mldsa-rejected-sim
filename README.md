@@ -26,7 +26,7 @@ printed in the paper's labelling, slot i having the root 1753^(2i+1) mod q.
 | `04b_coset_constants_independent.py` | Table "coset constants" | second implementation, different conventions (`PHI_K=64` default) | 1 min per s |
 | `06_atypical_mass.py` | Theorems "unconditional atypical mass" and "unconditional bound" | the full (s, slot kinds) accounting with the refined Fourier factor and cut-off r <= 40, without certificates, with the s = 2 certificate and with both; the coset accounting; the final distance | a few minutes |
 | `07_s2_certificate.py` | Lemma "s = 2 certificate" | certified bound over all 32 640 two-slot sets: exact integer minimum of the box terms, rational tails | 1 min |
-| `08_s3_certificate.py a b` / `splits k` / `combine` | Lemma "s = 3 certificate" (not used by the main theorem) | certified bound over all 2 763 520 three-slot sets: integer search, exact rational survivors, rational tails | about 18 CPU-hours in total |
+| `08_s3_certificate.py a b` / `splits k` / `combine` | Lemma "s = 3 certificate" (used by the main theorem) | certified bound over all 2 763 520 three-slot sets: integer search, exact rational survivors, rational tails | about 18 CPU-hours in total |
 
 `rigorous.py` holds the rational upper bounds shared by the two certificates. No floating point
 enters either certified bound: floats are used only to shortlist candidates, which are then
