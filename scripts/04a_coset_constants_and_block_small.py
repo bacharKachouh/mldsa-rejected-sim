@@ -9,7 +9,7 @@ mod s.  Hence B(t) = prod_j min(1, q/(2 alpha |t_j|)) <= 2^{-r M_s} for r nonzer
 This script computes M_s EXACTLY (brute force over all x in Z_q^*) for every s | 256 and evaluates
    sum_{t != 0} B(t) <= (1 + (q-1) 2^{-M_s})^s - 1.
 
-PART B (general slot sets, EXHAUSTIVE CERTIFICATE per S for small s): for s < 24 a character with
+PART B (general slot sets, exhaustive search over block-small characters, phi_64; sets printed in the paper's labelling): for s < 24 a character with
 more than 256 - 256/s small coordinates must be entirely small on some consecutive block J of
 length s; the minor (omega_i^j)_{i in S, j in J} is a Vandermonde in omega_i times a diagonal,
 hence invertible, so t is determined by t|_J.  Enumerating all t|_J in [-M, M]^s for each block
@@ -93,7 +93,7 @@ def certify(S, M):
             window = T[:, j + 1:j + s]
             val = (T[:, j + s] - (window @ pk_hi) % q) % q
             T[:, j] = (val * inv0) % q
-        best = max(best, float(logB_vec(T).max()))
+        best = max(best, float(logB_vec(T, 64.0).max()))       # phi_64, as in Section "Searches"
     return best
 
 def part_b(s, M, n_random, seed=0):
@@ -106,8 +106,9 @@ def part_b(s, M, n_random, seed=0):
         b = certify(S, M)
         tag = "STRUCT" if S in STRUCT4 + STRUCT3 else "random"
         if b > worst: worst, worst_S = b, S
-        print(f"   S={str(S):24s} [{tag}]  certified max log2 B over block-small characters = {b:8.1f}")
-    print(f"   worst over {len(sets)} sets: {worst:.1f} at S={worst_S};   crude-bound requirement: < -(7.7*s+17) = {-(7.7*s+17):.0f};"
+        Sm = tuple(sorted(255 - i for i in S))     # this program attaches root(i)^-1 = root(255-i) to index i
+        print(f"   S={str(Sm):24s} [{tag}]  (paper labelling)  max log2 B over block-small characters = {b:8.1f}")
+    print(f"   worst over {len(sets)} sets: {worst:.1f} at S={tuple(sorted(255 - i for i in worst_S))} (paper labelling);   crude-bound requirement: < -(7.7*s+17) = {-(7.7*s+17):.0f};"
           f"   coset value would be about -{4390/s:.0f}   [{time.time()-t0:.0f}s]")
 
 if __name__ == "__main__":

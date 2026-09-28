@@ -1,0 +1,6 @@
+ML-DSA-44: beta=78, 44 cells, bad counts per cell [(157, 158)] (shift-independent: True), total bad 6909
+   diagonal margin 2351 bits;  Lambda(128) = 2^5.49;  per slot: probability 2^-49.0, weight 2^22.0, together 2^-27.0
+ML-DSA-65: beta=196, 16 cells, bad counts per cell [(393, 394)] (shift-independent: True), total bad 6289
+   diagonal margin 3512 bits;  Lambda(128) = 2^4.09;  per slot: probability 2^-77.0, weight 2^24.5, together 2^-52.5
+ML-DSA-87: beta=120, 16 cells, bad counts per cell [(241, 242)] (shift-independent: True), total bad 3857
+   diagonal margin 4944 bits;  Lambda(128) = 2^4.09;  per slot: probability 2^-117.0, weight 2^32.7, together 2^-84.3

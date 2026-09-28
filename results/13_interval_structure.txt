@@ -1,0 +1,3 @@
+max cyclic intervals: good set 1, bad set 2
+total bad elements over all shifts: [6289]   total intervals per shift: [33, 48]
+OK: phi(a) = min(1, 8/|a|_c + min(6289/q, 16/|a|_c)) is justified

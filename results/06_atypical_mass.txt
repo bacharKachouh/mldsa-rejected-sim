@@ -1,27 +1,53 @@
-== Holder only: s=2 2^-54.78  s=3 2^-83.18  s=4 2^-111.93  s=5 2^-140.94  total 2^-54.78
-== s=2 certified only: total 2^-83.18
-per nonce-slot 99.9973 bits; rejected-coordinate loss 11.3811 bits; p_rej = 3.7479e-04
-Lambda(128) = 2^7.0148, Lambda(64) = 2^7.0245, Lambda(1) = 2^10.5957
 
-== symmetrised
+== no certificate
+   s=  1  largest term 2^ -3664.39   sum 2^ -3664.39
+   s=  2  largest term 2^   -89.88   sum 2^   -89.88
+   s=  3  largest term 2^  -135.95   sum 2^  -135.95
+   s=  4  largest term 2^  -182.42   sum 2^  -182.42
+   s=  5  largest term 2^  -229.20   sum 2^  -229.20
+   s=  6  largest term 2^  -276.23   sum 2^  -276.23
+   s=  8  largest term 2^  -370.86   sum 2^  -370.86
+   s= 16  largest term 2^  -753.01   sum 2^  -753.01
+   s= 64  largest term 2^ -3022.01   sum 2^ -3022.01
+   s=128  largest term 2^ -5719.06   sum 2^ -5719.06
+   sum over s >= 5: 2^-229.2
+   largest per-s sum for s >= 129: 2^-2880.3
+   diagonal (averaged over the z-data): 2^-3255.1;  Pr[r > 40] = 2^-209.55
+   TOTAL atypical mass 2^-89.88;   E_A SD <= 2^-45.94
+
+== s=2 certificate (Theorem 'unconditional bound')
+   s=  1  largest term 2^ -3664.39   sum 2^ -3664.39
+   s=  2  largest term 2^  -190.67   sum 2^  -190.67
+   s=  3  largest term 2^  -135.95   sum 2^  -135.95
+   s=  4  largest term 2^  -182.42   sum 2^  -182.42
+   s=  5  largest term 2^  -229.20   sum 2^  -229.20
+   s=  6  largest term 2^  -276.23   sum 2^  -276.23
+   s=  8  largest term 2^  -370.86   sum 2^  -370.86
+   s= 16  largest term 2^  -753.01   sum 2^  -753.01
+   s= 64  largest term 2^ -3022.01   sum 2^ -3022.01
+   s=128  largest term 2^ -5719.06   sum 2^ -5719.06
+   sum over s >= 5: 2^-229.2
+   largest per-s sum for s >= 129: 2^-2880.3
+   diagonal (averaged over the z-data): 2^-3255.1;  Pr[r > 40] = 2^-209.55
+   TOTAL atypical mass 2^-135.95;   E_A SD <= 2^-68.98
+
+== s=2 and s=3 certificates
    s=  1  largest term 2^ -3664.39   sum 2^ -3664.39
    s=  2  largest term 2^  -190.67   sum 2^  -190.67
    s=  3  largest term 2^  -230.01   sum 2^  -230.01
-   s=  4  largest term 2^  -111.93   sum 2^  -111.93
-   s=  5  largest term 2^  -140.94   sum 2^  -140.94
-   s=  6  largest term 2^  -170.13   sum 2^  -170.13
-   s=  8  largest term 2^  -229.01   sum 2^  -229.01
-   s= 16  largest term 2^  -467.50   sum 2^  -467.50
-   s= 64  largest term 2^ -1872.67   sum 2^ -1872.67
-   s=128  largest term 2^ -3427.60   sum 2^ -3427.60
-   s=129  largest term 2^ -1765.48   sum 2^ -1765.48
-   s=200  largest term 2^ -1809.00   sum 2^ -1809.00
-   s=256  largest term 2^ -2481.86   sum 2^ -2481.86
-   sum over s >= 5: 2^-140.9
-   largest per-s sum for s >= 129: 2^-1717.9
-   diagonal (averaged over the z-data): 2^-3362.8
-   Pr[r > 20] = 2^-88.6
-   TOTAL atypical mass 2^-111.93;   E_A SD <= Pr[r > R] + 1/2 sqrt(diag + mass) = 2^-56.97
+   s=  4  largest term 2^  -182.42   sum 2^  -182.42
+   s=  5  largest term 2^  -229.20   sum 2^  -229.20
+   s=  6  largest term 2^  -276.23   sum 2^  -276.23
+   s=  8  largest term 2^  -370.86   sum 2^  -370.86
+   s= 16  largest term 2^  -753.01   sum 2^  -753.01
+   s= 64  largest term 2^ -3022.01   sum 2^ -3022.01
+   s=128  largest term 2^ -5719.06   sum 2^ -5719.06
+   sum over s >= 5: 2^-229.2
+   largest per-s sum for s >= 129: 2^-2880.3
+   diagonal (averaged over the z-data): 2^-3255.1;  Pr[r > 40] = 2^-209.55
+   TOTAL atypical mass 2^-182.42;   E_A SD <= 2^-92.21
+
+Lambda(128) = 2^4.0875, Lambda(64) = 2^4.0876, Lambda(42) = 2^4.0887, Lambda(2) = 2^5.0135, Lambda(1) = 2^8.7404
 
 == coset slot sets (single slot and cosets of order <= 64)
    s=  1  contribution 2^-3665.2

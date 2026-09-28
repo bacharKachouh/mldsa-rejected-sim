@@ -1,7 +1,9 @@
 """
-holder_bound.py -- the UNCONDITIONAL character-sum bound (paper Sec. 6.4) and the s=2 certificate.
+07 -- the s = 2 certificate (paper, Lemma "s = 2 certificate").  Everything here uses the cruder
+factor phi_64(a) = min(1, 64/|a|_c), which is at least the paper's refined factor at every point,
+so the certified bound also holds for the refined factor.
 
-Part 1: Lambda(L) = sum_{a in Z_q} phi(a)^L with phi(a) = min(1, 64/|a|_c), exactly, for the block
+Part 1: Lambda_64(L) = sum_{a in Z_q} phi_64(a)^L, exactly, for the block
         counts L = floor(256/s).  Holder gives  sum_{t in V_S^perp} B(t) <= Lambda(L)^s  for EVERY
         slot set S of size s (no structure), and with square roots  <= Lambda(L/2)^{s} for the
         rank-zero refinement.  Also prints the resulting per-s mass bound

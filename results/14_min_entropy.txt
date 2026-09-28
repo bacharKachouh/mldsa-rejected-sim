@@ -1,0 +1,7 @@
+log2 Pr[corank >= 1] = -22.999,  log2 Pr[corank >= 2] = -91.994
+min-entropy with d = 0: 1281.80 bits
+Pr[d >= 5] = 2^-82.0;  for d <= 4: H_inf >= 1189.8 bits
+Pr[d >= 10] = 2^-172.0;  for d <= 9: H_inf >= 1074.8 bits
+Pr[d >= 20] = 2^-362.1;  for d <= 19: H_inf >= 844.8 bits
+Pr[d >= 30] = 2^-560.2;  for d <= 29: H_inf >= 614.8 bits
+Pr[d >= 40] = 2^-763.7;  for d <= 39: H_inf >= 384.9 bits

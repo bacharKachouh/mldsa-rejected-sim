@@ -1,0 +1,68 @@
+# independent checks -- expected output (Python 3.12, numpy 2.4, mpmath 1.3; one core)
+
+===== r0_counts.py
+cell sizes |C_0|, |C_v|: 523777 523776
+distinct (N_0, {N_1..N_15}) over |s| <= 196: [(394, (393,))] PASS
+outside the range, s = 197: (394, (393,))
+outside the range, s = -197: (393, (393, 394))
+[24s]
+
+===== Ms.py (s=1, then s=2..128 in a second process)
+s=1: K=64: M_s=3621.7941 s*M_s=3621.79 log2eps=-3598.795 gap=5.075 | K=8: M_s=4389.7941 s*M_s=4389.79 log2eps=-4366.795 gap=5.075 | log2 G_s(x_s=31705) = -3621.7941 [134s]
+s=2: K=64: M_s=1782.7841 s*M_s=3565.57 log2eps=-1758.786 gap=7.758 | K=8: M_s=2166.7841 s*M_s=4333.57 log2eps=-2142.786 gap=7.758 | log2 G_s(x_s=8594) = -1782.7841 [69s]
+s=4: K=64: M_s=875.1261 s*M_s=3500.50 log2eps=-850.127 gap=4.043 | K=8: M_s=1067.1261 s*M_s=4268.50 log2eps=-1042.127 gap=4.043 | log2 G_s(x_s=1089130) = -875.1261 [33s]
+s=8: K=64: M_s=423.2064 s*M_s=3385.65 log2eps=-397.208 gap=0.234 | K=8: M_s=519.2064 s*M_s=4153.65 log2eps=-493.208 gap=0.234 | log2 G_s(x_s=7646) = -423.2064 [16s]
+s=16: K=64: M_s=193.4147 s*M_s=3094.63 log2eps=-166.416 gap=1.155 | K=8: M_s=241.4147 s*M_s=3862.63 log2eps=-214.416 gap=1.155 | log2 G_s(x_s=89) = -193.4147 [8s]
+s=32: K=64: M_s=78.7667 s*M_s=2520.53 log2eps=-50.768 gap=4.286 | K=8: M_s=102.7667 s*M_s=3288.53 log2eps=-74.768 gap=4.286 | log2 G_s(x_s=89) = -78.7667 [4s]
+s=64: K=64: M_s=34.7568 s*M_s=2224.43 log2eps=-5.745 gap=0.267 | K=8: M_s=46.3715 s*M_s=2967.77 log2eps=-17.373 gap=0.652 | log2 G_s(x_s=49) = -34.7568 [2s]
+s=128: K=64: M_s=7.8495 s*M_s=1004.74 log2eps=1939.088 gap=0.742 | K=8: M_s=13.7802 s*M_s=1763.87 log2eps=1180.259 gap=0.270 | log2 G_s(x_s=61) = -7.8495 [1s]
+
+===== s2_check.py
+C:\Users\Bachar\AppData\Local\Temp\claude\C--sources-threshold-mldsa\1ed7b056-d3ed-4605-880e-8810e08178f6\scratchpad\refB\independent_checks\s2_check.py:4: SyntaxWarning: invalid escape sequence '\ '
+  C = V diag(w1^2, w2^2) V^-1, V = [[1,1],[w1,w2]], and for every x in [-128,128]^2 \ 0 checks
+tail(64) <= 2^-62.346269  Lambda(64) <= 2^7.024537  2 tail Lambda <= 2^-54.321732
+box part (257^2-1)(2^24/T)^64 = 2^-90.1143
+s=3: (i) <= 2^-23.937539   (ii) = 2^-102.1014
+x with P < T over all 32640 sets: 0  (PASS); P = T attained at [(3, 7, 2), (131, 135, 2)]  [83s]
+
+===== mass_check.py   [default: --phi refined --R 40]
+selftest Lambda(0.37): closed form 2^17.212276373  direct fsum 2^17.212276373
+selftest Lambda(1): closed form 2^8.740440023  direct fsum 2^8.740440023
+selftest Lambda(2): closed form 2^5.013518045  direct fsum 2^5.013518045
+selftest Lambda(42): closed form 2^4.088727107  direct fsum 2^4.088727107
+selftest Lambda(64): closed form 2^4.087558330  direct fsum 2^4.087558330
+selftest Lambda(128): closed form 2^4.087462895  direct fsum 2^4.087462895
+Lambda tables done [4s]
+   Lambda(128) = 2^4.08746
+   Lambda(85) = 2^4.08747
+   Lambda(64) = 2^4.08756
+   Lambda(42) = 2^4.08873
+   Lambda(2) = 2^5.01352
+   Lambda(1) = 2^8.74044
+phi=refined  R=40  grid=1/200
+Pr[r > 40] = 2^-209.552   (exact rational; log2 = log2 num - log2 den = -210 +- 1)
+diagonal (averaged over z-data) = 2^-3255.1
+certs=none: total mass 2^-89.880 | s2 2^-89.88 s3 2^-135.95 s4 2^-182.42 s5 2^-229.20 | s>=5 2^-229.20 | max s>=129 2^-2880.3 | SD <= 2^-45.940  [36s]
+certs=   2: total mass 2^-135.955 | s2 2^-190.67 s3 2^-135.95 s4 2^-182.42 s5 2^-229.20 | s>=5 2^-229.20 | max s>=129 2^-2880.3 | SD <= 2^-68.977  [69s]
+certs=  23: total mass 2^-182.417 | s2 2^-190.67 s3 2^-230.01 s4 2^-182.42 s5 2^-229.20 | s>=5 2^-229.20 | max s>=129 2^-2880.3 | SD <= 2^-92.208  [102s]
+
+===== mass_check.py --phi 64 --R 20  [cruder factor phi_64, cut-off 20]
+selftest Lambda(0.37): closed form 2^17.745194797  direct fsum 2^17.745194797
+selftest Lambda(1): closed form 2^10.595670539  direct fsum 2^10.595670539
+selftest Lambda(2): closed form 2^8.000018333  direct fsum 2^8.000018333
+selftest Lambda(42): closed form 2^7.035959189  direct fsum 2^7.035959189
+selftest Lambda(64): closed form 2^7.024536641  direct fsum 2^7.024536641
+selftest Lambda(128): closed form 2^7.014807453  direct fsum 2^7.014807453
+Lambda tables done [2s]
+   Lambda(128) = 2^7.01481
+   Lambda(85) = 2^7.01947
+   Lambda(64) = 2^7.02454
+   Lambda(42) = 2^7.03596
+   Lambda(2) = 2^8.00002
+   Lambda(1) = 2^10.59567
+phi=64  R=20  grid=1/200
+Pr[r > 20] = 2^-88.611   (exact rational; log2 = log2 num - log2 den = -89 +- 1)
+diagonal (averaged over z-data) = 2^-3362.8
+certs=none: total mass 2^-54.781 | s2 2^-54.78 s3 2^-83.18 s4 2^-111.93 s5 2^-140.94 | s>=5 2^-140.94 | max s>=129 2^-1717.9 | SD <= 2^-28.390  [38s]
+certs=   2: total mass 2^-83.181 | s2 2^-190.67 s3 2^-83.18 s4 2^-111.93 s5 2^-140.94 | s>=5 2^-140.94 | max s>=129 2^-1717.9 | SD <= 2^-42.590  [76s]
+certs=  23: total mass 2^-111.934 | s2 2^-190.67 s3 2^-230.01 s4 2^-111.93 s5 2^-140.94 | s>=5 2^-140.94 | max s>=129 2^-1717.9 | SD <= 2^-56.967  [114s]

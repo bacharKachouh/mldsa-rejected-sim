@@ -1,0 +1,53 @@
+PART B  general slot sets, s=3, exhaustive over t|_J in [-8,8]^s for every consecutive block J
+   S=(39, 93, 125)            [random]  (paper labelling)  max log2 B over block-small characters =  -3599.1
+   S=(236, 245, 251)          [random]  (paper labelling)  max log2 B over block-small characters =  -3591.8
+   S=(23, 91, 127)            [random]  (paper labelling)  max log2 B over block-small characters =  -3560.8
+   S=(70, 94, 116)            [random]  (paper labelling)  max log2 B over block-small characters =  -3600.6
+   S=(47, 84, 185)            [random]  (paper labelling)  max log2 B over block-small characters =  -3600.2
+   S=(38, 114, 247)           [random]  (paper labelling)  max log2 B over block-small characters =  -3592.2
+   S=(40, 211, 233)           [random]  (paper labelling)  max log2 B over block-small characters =  -3595.2
+   S=(118, 179, 235)          [random]  (paper labelling)  max log2 B over block-small characters =  -3592.1
+   S=(153, 248, 254)          [random]  (paper labelling)  max log2 B over block-small characters =  -3588.1
+   S=(85, 90, 121)            [random]  (paper labelling)  max log2 B over block-small characters =  -3586.3
+   S=(61, 138, 158)           [random]  (paper labelling)  max log2 B over block-small characters =  -3593.2
+   S=(6, 80, 159)             [random]  (paper labelling)  max log2 B over block-small characters =  -3589.1
+   S=(42, 75, 80)             [random]  (paper labelling)  max log2 B over block-small characters =  -3599.2
+   S=(71, 108, 221)           [random]  (paper labelling)  max log2 B over block-small characters =  -3569.2
+   S=(147, 160, 176)          [random]  (paper labelling)  max log2 B over block-small characters =  -3600.3
+   S=(16, 30, 237)            [random]  (paper labelling)  max log2 B over block-small characters =  -3585.8
+   S=(85, 110, 190)           [random]  (paper labelling)  max log2 B over block-small characters =  -3595.1
+   S=(105, 127, 169)          [random]  (paper labelling)  max log2 B over block-small characters =  -3592.1
+   S=(28, 172, 188)           [random]  (paper labelling)  max log2 B over block-small characters =  -3203.6
+   S=(97, 234, 243)           [random]  (paper labelling)  max log2 B over block-small characters =  -3601.5
+   S=(55, 154, 174)           [random]  (paper labelling)  max log2 B over block-small characters =  -3603.0
+   S=(33, 235, 241)           [random]  (paper labelling)  max log2 B over block-small characters =  -3588.5
+   S=(35, 110, 217)           [random]  (paper labelling)  max log2 B over block-small characters =  -3590.2
+   S=(53, 76, 196)            [random]  (paper labelling)  max log2 B over block-small characters =  -3607.0
+   S=(0, 111, 152)            [random]  (paper labelling)  max log2 B over block-small characters =  -3598.1
+   S=(97, 107, 232)           [random]  (paper labelling)  max log2 B over block-small characters =  -3598.9
+   S=(26, 28, 84)             [random]  (paper labelling)  max log2 B over block-small characters =  -3592.7
+   S=(16, 162, 243)           [random]  (paper labelling)  max log2 B over block-small characters =  -3590.3
+   S=(60, 95, 126)            [random]  (paper labelling)  max log2 B over block-small characters =  -3611.2
+   S=(11, 135, 144)           [random]  (paper labelling)  max log2 B over block-small characters =  -3601.4
+   S=(127, 254, 255)          [STRUCT]  (paper labelling)  max log2 B over block-small characters =  -1842.5
+   S=(253, 254, 255)          [STRUCT]  (paper labelling)  max log2 B over block-small characters =  -3601.9
+   S=(85, 170, 255)           [STRUCT]  (paper labelling)  max log2 B over block-small characters =  -3600.5
+   worst over 33 sets: -1842.5 at S=(127, 254, 255) (paper labelling);   crude-bound requirement: < -(7.7*s+17) = -40;   coset value would be about -1463   [129s]
+PART B  general slot sets, s=4, exhaustive over t|_J in [-4,4]^s for every consecutive block J
+   S=(40, 94, 125, 186)       [random]  (paper labelling)  max log2 B over block-small characters =  -3584.6
+   S=(48, 89, 211, 251)       [random]  (paper labelling)  max log2 B over block-small characters =  -3581.6
+   S=(10, 70, 94, 116)        [random]  (paper labelling)  max log2 B over block-small characters =  -3574.6
+   S=(49, 85, 155, 255)       [random]  (paper labelling)  max log2 B over block-small characters =  -3564.0
+   S=(40, 62, 70, 211)        [random]  (paper labelling)  max log2 B over block-small characters =  -3573.5
+   S=(119, 132, 179, 235)     [random]  (paper labelling)  max log2 B over block-small characters =  -3584.6
+   S=(84, 224, 253, 254)      [random]  (paper labelling)  max log2 B over block-small characters =  -3580.8
+   S=(61, 100, 138, 158)      [random]  (paper labelling)  max log2 B over block-small characters =  -3583.2
+   S=(13, 81, 89, 159)        [random]  (paper labelling)  max log2 B over block-small characters =  -3573.7
+   S=(33, 107, 157, 221)      [random]  (paper labelling)  max log2 B over block-small characters =  -3546.4
+   S=(131, 148, 161, 177)     [random]  (paper labelling)  max log2 B over block-small characters =  -3582.5
+   S=(19, 83, 121, 164)       [random]  (paper labelling)  max log2 B over block-small characters =  -3591.6
+   S=(127, 191, 254, 255)     [STRUCT]  (paper labelling)  max log2 B over block-small characters =  -3585.3
+   S=(126, 127, 254, 255)     [STRUCT]  (paper labelling)  max log2 B over block-small characters =  -1781.5
+   S=(252, 253, 254, 255)     [STRUCT]  (paper labelling)  max log2 B over block-small characters =  -3579.1
+   S=(62, 127, 191, 255)      [STRUCT]  (paper labelling)  max log2 B over block-small characters =  -3586.6
+   worst over 16 sets: -1781.5 at S=(126, 127, 254, 255) (paper labelling);   crude-bound requirement: < -(7.7*s+17) = -48;   coset value would be about -1098   [65s]

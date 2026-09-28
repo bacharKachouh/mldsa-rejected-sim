@@ -12,10 +12,14 @@ Split x in Z_q^3 minus 0:
   (i)   max|x_j| > X:            total <= 3 * (2 * 64^42 X^{-41} / 41) * Lambda(42)^2   [tail bound]
   (ii)  max|x_j| <= X and max|(Cx)_j| > X':  each term <= (64/(X'+1))^{42}, count <= (2X+1)^3
   (iii) max|x_j| <= X and max|(Cx)_j| <= X': found by meet-in-the-middle and evaluated exactly.
-With X = 128 the exact tail (i) is 2^-23.94 (summed exactly by 06/07; the integral bound gives 2^-23.70):
+With X = 128 the tail (i) is at most 2^-23.94 (rational bound of rigorous.py; the integral bound
+gives 2^-23.70), and
   (ii) <= 257^3 * (64/513)^42 = 2^24 * 2^-126 = 2^-102.
-The certificate for S is  (iii) + 2^-23.94 + 2^-102.1.  Result (all 2,763,520 sets, 4 chunks x ~4.6 h):
-  worst (iii) = 2^-24.2 at the 3-element cosets {i, i+64, i+128}; hence Sigma_S <= 2^-23.06 for every S.
+The certificate for S is  (iii) + 2^-23.94 + 2^-102.1.  Result (all 2,763,520 sets, 20 chunks,
+about 18 CPU-hours in total): worst (iii) = 2^-24.196, at the eight sets {19,83,147} + 64k and their
+mirror images under i -> 255 - i; hence Sigma_S <= 2^-23.0611 for every S.
+phi is phi_64 = min(1, 64/|a|_c), at least the paper's refined factor, so the bound holds for both.
+The paper's main theorem does not use this certificate; it sharpens the constant.
 Meet in the middle: enumerate (x1,x2) in [-X,X]^2 (66049 pairs), p = x1*C[:,0] + x2*C[:,1] mod q;
 for coordinate 0, x3 must satisfy (p_0 + x3*C[0,2]) mod q in [-X',X']; precompute the sorted
 array of x3*C[0,2] mod q for x3 in [-X,X]; a candidate exists iff some element lies in the arc
