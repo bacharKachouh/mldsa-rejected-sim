@@ -16,8 +16,10 @@ With X = 128 the tail (i) is at most 2^-23.94 (rational bound of rigorous.py; th
 gives 2^-23.70), and
   (ii) <= 257^3 * (64/513)^42 = 2^24 * 2^-126 = 2^-102.
 The certificate for S is  (iii) + 2^-23.94 + 2^-102.1.  Result (all 2,763,520 sets, 20 chunks,
-about 18 CPU-hours in total): worst (iii) = 2^-24.196, at the eight sets {19,83,147} + 64k and their
-mirror images under i -> 255 - i; hence Sigma_S <= 2^-23.0611 for every S.
+about 18 CPU-hours in total): worst (iii) = 2^-24.196, at {19,83,147} and {19,147,211}; their mirror
+images under i -> 255 - i come within a relative 1e-16 of it. Hence Sigma_S <= 2^-23.0611 for every S.
+independent_checks/s3_check.py repeats the search by a different method and writes every term of
+(iii) to results/s3_survivors.txt (96 terms in 44 sets).
 phi is phi_64 = min(1, 64/|a|_c), at least the paper's refined factor, so the bound holds for both.
 The paper's main theorem (Theorem "unconditional bound") uses this certificate.
 Meet in the middle: enumerate (x1,x2) in [-X,X]^2 (66049 pairs), p = x1*C[:,0] + x2*C[:,1] mod q;

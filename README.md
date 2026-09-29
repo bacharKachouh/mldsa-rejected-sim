@@ -27,6 +27,8 @@ printed in the paper's labelling, slot i having the root 1753^(2i+1) mod q.
 | `06_atypical_mass.py` | Theorems "unconditional atypical mass" and "unconditional bound" | the full (s, slot kinds) accounting with the refined Fourier factor and cut-off r <= 40, without certificates, with the s = 2 certificate and with both; the coset accounting; the final distance | a few minutes |
 | `07_s2_certificate.py` | Lemma "s = 2 certificate" | certified bound over all 32 640 two-slot sets: exact integer minimum of the box terms, rational tails | 1 min |
 | `08_s3_certificate.py a b` / `splits k` / `combine` | Lemma "s = 3 certificate" (used by the main theorem) | certified bound over all 2 763 520 three-slot sets: integer search, exact rational survivors, rational tails | about 18 CPU-hours in total |
+| `16_mass_certified.py` | Theorems "unconditional atypical mass", "unconditional bound" and "existential unforgeability with revealed attempts" | the sum of `06` with directed rounding: interval arithmetic for every transcendental quantity, outward-rounded float sums, certified upper bounds on Lambda; checks every constant the theorems state | a few minutes |
+| `17_sampleinball_uniform.py` | Lemma "SampleInBall" | exhaustive check at small (n, tau) that the FIPS 204 SampleInBall loop maps uniform choices to the uniform law on B_tau | seconds |
 
 `rigorous.py` holds the rational upper bounds shared by the two certificates. No floating point
 enters either certified bound: floats are used only to shortlist candidates, which are then
@@ -41,15 +43,21 @@ scripts/08_s3_certificate.py splits 20` prints 20 chunks of roughly equal work; 
 directory. It checks that the chunks cover every set and prints the certified bound.
 
 `results/` holds the outputs of every script above, including the 20 per-chunk files of the
-s = 3 run, so that `combine` can be re-checked without the 18-hour search.
+s = 3 run, so that `combine` can be re-checked without the 18-hour search, and
+`s3_survivors.txt`, the list of all 96 terms of part (iii) of the s = 3 certificate (slot set and
+block x). `python independent_checks/s3_check.py --witness` re-verifies every listed term, checks
+the per-chunk counts against `s3_chunks/` and recomputes the largest value, in seconds.
 
 ## Independent checks
 
 `independent_checks/` holds second implementations, written separately and importing nothing
-from `scripts/`, of four items: `r0_counts.py` (Lemma "bad counts are shift-independent"),
+from `scripts/`, of five items: `r0_counts.py` (Lemma "bad counts are shift-independent"),
 `Ms.py` (the coset constants, through a product over the whole subgroup), `s2_check.py` (the
-s = 2 certificate, by an integer threshold test) and `mass_check.py` (the atypical mass, with
-Lambda summed piecewise and Hurwitz-zeta tails). `expected_output.txt` records their output.
+s = 2 certificate, by an integer threshold test), `s3_check.py` (the s = 3 certificate: the
+block-step matrix formed by diagonalising in the slot basis, and the meet-in-the-middle search
+run from the other side, on the last row; about 3 CPU-hours, 14 minutes on 23 cores) and
+`mass_check.py` (the atypical mass, with Lambda summed piecewise and Hurwitz-zeta tails).
+`expected_output.txt` records their output.
 
 ## Other material
 

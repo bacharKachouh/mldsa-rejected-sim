@@ -64,3 +64,55 @@ diagonal (averaged over z-data) = 2^-3362.8
 certs=none: total mass 2^-54.781 | s2 2^-54.78 s3 2^-83.18 s4 2^-111.93 s5 2^-140.94 | s>=5 2^-140.94 | max s>=129 2^-1717.9 | SD <= 2^-28.390  [38s]
 certs=   2: total mass 2^-83.181 | s2 2^-190.67 s3 2^-83.18 s4 2^-111.93 s5 2^-140.94 | s>=5 2^-140.94 | max s>=129 2^-1717.9 | SD <= 2^-42.590  [76s]
 certs=  23: total mass 2^-111.934 | s2 2^-190.67 s3 2^-230.01 s4 2^-111.93 s5 2^-140.94 | s>=5 2^-140.94 | max s>=129 2^-1717.9 | SD <= 2^-56.967  [114s]
+
+===== s3_check.py 23   [full search, 23 worker processes; summary lines]
+   i1 in [  0,  5): full survivors    4 (08:    4) ok
+   i1 in [  5,  9): full survivors    0 (08:    0) ok
+   i1 in [  9, 14): full survivors    2 (08:    2) ok
+   i1 in [ 14, 19): full survivors    0 (08:    0) ok
+   i1 in [ 19, 24): full survivors   18 (08:   18) ok
+   i1 in [ 24, 29): full survivors    4 (08:    4) ok
+   i1 in [ 29, 35): full survivors    0 (08:    0) ok
+   i1 in [ 35, 40): full survivors    0 (08:    0) ok
+   i1 in [ 40, 47): full survivors   14 (08:   14) ok
+   i1 in [ 47, 53): full survivors    2 (08:    2) ok
+   i1 in [ 53, 60): full survivors   10 (08:   10) ok
+   i1 in [ 60, 68): full survivors    8 (08:    8) ok
+   i1 in [ 68, 76): full survivors    0 (08:    0) ok
+   i1 in [ 76, 85): full survivors    6 (08:    6) ok
+   i1 in [ 85, 95): full survivors    2 (08:    2) ok
+   i1 in [ 95,106): full survivors    6 (08:    6) ok
+   i1 in [106,120): full survivors    6 (08:    6) ok
+   i1 in [120,137): full survivors    4 (08:    4) ok
+   i1 in [137,162): full survivors    0 (08:    0) ok
+   i1 in [162,256): full survivors   10 (08:   10) ok
+sets searched 2763520 (expected 2763520); sets with a survivor 44; survivors 96
+largest (iii): log2 = -24.1963, exactly equal to 08's stored rational: True; attained at 2 sets [(19, 83, 147), (19, 147, 211)]
+PASS
+[819s wall]
+
+===== s3_check.py --witness
+witness rows verified: 96
+   i1 in [  0,  5): full survivors    4 (08:    4) ok
+   i1 in [  5,  9): full survivors    0 (08:    0) ok
+   i1 in [  9, 14): full survivors    2 (08:    2) ok
+   i1 in [ 14, 19): full survivors    0 (08:    0) ok
+   i1 in [ 19, 24): full survivors   18 (08:   18) ok
+   i1 in [ 24, 29): full survivors    4 (08:    4) ok
+   i1 in [ 29, 35): full survivors    0 (08:    0) ok
+   i1 in [ 35, 40): full survivors    0 (08:    0) ok
+   i1 in [ 40, 47): full survivors   14 (08:   14) ok
+   i1 in [ 47, 53): full survivors    2 (08:    2) ok
+   i1 in [ 53, 60): full survivors   10 (08:   10) ok
+   i1 in [ 60, 68): full survivors    8 (08:    8) ok
+   i1 in [ 68, 76): full survivors    0 (08:    0) ok
+   i1 in [ 76, 85): full survivors    6 (08:    6) ok
+   i1 in [ 85, 95): full survivors    2 (08:    2) ok
+   i1 in [ 95,106): full survivors    6 (08:    6) ok
+   i1 in [106,120): full survivors    6 (08:    6) ok
+   i1 in [120,137): full survivors    4 (08:    4) ok
+   i1 in [137,162): full survivors    0 (08:    0) ok
+   i1 in [162,256): full survivors   10 (08:   10) ok
+sets searched None (expected 2763520); sets with a survivor 44; survivors 96
+largest (iii): log2 = -24.1963, exactly equal to 08's stored rational: True; attained at 2 sets [(19, 83, 147), (19, 147, 211)]
+PASS

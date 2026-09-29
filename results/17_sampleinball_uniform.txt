@@ -1,0 +1,4 @@
+n= 6 tau=2: 120 runs, 60 outputs (|B_tau| = 60), each {2} times: UNIFORM
+n= 8 tau=3: 2688 runs, 448 outputs (|B_tau| = 448), each {6} times: UNIFORM
+n=10 tau=4: 80640 runs, 3360 outputs (|B_tau| = 3360), each {24} times: UNIFORM
+n=12 tau=5: 3041280 runs, 25344 outputs (|B_tau| = 25344), each {120} times: UNIFORM
