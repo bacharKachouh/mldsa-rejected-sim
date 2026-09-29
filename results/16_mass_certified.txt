@@ -1,4 +1,4 @@
-Lambda tables (31 values of L, grid 1/200) [21s]
+Lambda tables (31 values of L, grid 1/200) [80s]
    log2 Lambda(128) <= 4.087463
    log2 Lambda(85) <= 4.087471
    log2 Lambda(64) <= 4.087558
@@ -6,20 +6,33 @@ Lambda tables (31 values of L, grid 1/200) [21s]
    log2 Lambda(2) <= 5.014303
    log2 Lambda(1) <= 8.742937
 Pr[r > 40] <= 2^-209.5519   diagonal (averaged over the z-data) <= 2^-3255.1230
-certs=none: mass <= 2^-89.8796 | s2 2^-89.8796 s3 2^-135.9548 s4 2^-182.4215 s5 2^-229.2048 | 186043460 terms below 2^-400 (max 2^-407.7) | E_A SD <= 2^-45.9398  [69s]
-certs=   2: mass <= 2^-135.9548 | s2 2^-190.6741 s3 2^-135.9548 s4 2^-182.4215 s5 2^-229.2048 | 186043460 terms below 2^-400 (max 2^-407.7) | E_A SD <= 2^-68.9774  [115s]
-certs= 2,3: mass <= 2^-182.4167 | s2 2^-190.6741 s3 2^-230.0060 s4 2^-182.4215 s5 2^-229.2048 | 186043460 terms below 2^-400 (max 2^-407.7) | E_A SD <= 2^-92.2084  [162s]
-Theorem uf, Q_A = 2^67: additive Markov terms Q_A (6.5 + 2) E X + Q_A Pr[r>40] <= 2^-112.3293; cross-term factor sqrt(2(e-1) Q_A E X) <= 2^-56.8179
-   with the two-slot certificate only: additive <= 2^-65.8673; cross-term factor <= 2^-33.5869
-   per key, all but a 2^-20 fraction of matrices: lifetime additive loss <= 2^-92.7163; cross-term factor <= 2^-46.8179
-   per key, all but a 2^-40 fraction of matrices: lifetime additive loss <= 2^-72.7163; cross-term factor <= 2^-36.8179
-   per key, all but a 2^-60 fraction of matrices: lifetime additive loss <= 2^-52.7163; cross-term factor <= 2^-26.8179
-   PASS  Theorem unconditional bound: M <= 2^-182.41
+certs=none: mass <= 2^-89.8796 | s2 2^-89.8796 s3 2^-135.9548 s4 2^-182.4215 s5 2^-229.2048 | 186043460 terms below 2^-400 (max 2^-407.7) | E_A SD <= 2^-45.9398  [208s]
+certs=   2: mass <= 2^-135.9548 | s2 2^-190.6741 s3 2^-135.9548 s4 2^-182.4215 s5 2^-229.2048 | 186043460 terms below 2^-400 (max 2^-407.7) | E_A SD <= 2^-68.9774  [289s]
+certs= 2,3: mass <= 2^-182.4167 | s2 2^-190.6741 s3 2^-230.0060 s4 2^-182.4215 s5 2^-229.2048 | 186043460 terms below 2^-400 (max 2^-407.7) | E_A SD <= 2^-92.2084  [373s]
+Theorem uf, Q_A = 2^67, Q_H = 2^128: Q_A (6.5 + 2) Xbar <= 2^-112.3225; eps_mu <= 2^-257.0000; cross-term factor sqrt(2(e-1) Q_A Xbar) <= 2^-56.8145
+   two-slot constants: Q_A 8.5 Xbar <= 2^-65.7125; cross-term factor <= 2^-33.5095
+   one key, kappa =   0: additive <= 2^-112.7096; cross-term factor <= 2^-56.8145; key good: True
+   one key, kappa =  20: additive <= 2^-92.7096; cross-term factor <= 2^-46.8145; key good: True
+   one key, kappa =  40: additive <= 2^-72.7096; cross-term factor <= 2^-36.8145; key good: True
+   one key, kappa =  60: additive <= 2^-52.7096; cross-term factor <= 2^-26.8145; key good: True
+   one key, kappa = 114: additive <= 2^1.2904; cross-term factor <= 2^0.1855; key good: True
+   PASS  Theorem unconditional bound: M <= 2^-182.416
    PASS  Theorem unconditional bound: E_A SD < 2^-92.2
    PASS  Remark two-slot: M <= 2^-135.9
    PASS  Remark two-slot: E_A SD < 2^-68.9
    PASS  E_A X(A) < 2^-182.4
+   PASS  E_A X(A) <= Xbar = 2^-182.41
+   PASS  two-slot: E_A X(A) <= 2^-135.8
+   PASS  eps_mu <= 2^-256.9
+   PASS  8.5 Xbar <= 2^-179.32
+   PASS  8.5 Xbar(two-slot) <= 2^-132.71
    PASS  additive terms < 2^-112.3
-   PASS  cross-term factor < 2^-56.8
+   PASS  cross-term factor < 2^-56.81
    PASS  two-slot: additive < 2^-65.7
-[162s]
+   PASS  two-slot: cross-term factor < 2^-33.5
+   PASS  one key, kappa = 0: additive < 2^(-112.7+kappa), cross < 2^(-56.8+kappa/2), good
+   PASS  one key, kappa = 20: additive < 2^(-112.7+kappa), cross < 2^(-56.8+kappa/2), good
+   PASS  one key, kappa = 40: additive < 2^(-112.7+kappa), cross < 2^(-56.8+kappa/2), good
+   PASS  one key, kappa = 60: additive < 2^(-112.7+kappa), cross < 2^(-56.8+kappa/2), good
+   PASS  one key, kappa = 114: additive < 2^(-112.7+kappa), cross < 2^(-56.8+kappa/2), good
+[373s]

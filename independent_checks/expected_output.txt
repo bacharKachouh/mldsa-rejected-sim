@@ -89,7 +89,7 @@ certs=  23: total mass 2^-111.934 | s2 2^-190.67 s3 2^-230.01 s4 2^-111.93 s5 2^
 sets searched 2763520 (expected 2763520); sets with a survivor 44; survivors 96
 largest (iii): log2 = -24.1963, exactly equal to 08's stored rational: True; attained at 2 sets [(19, 83, 147), (19, 147, 211)]
 PASS
-[819s wall]
+[826s wall]
 
 ===== s3_check.py --witness
 witness rows verified: 96
@@ -115,4 +115,4 @@ witness rows verified: 96
    i1 in [162,256): full survivors   10 (08:   10) ok
 sets searched None (expected 2763520); sets with a survivor 44; survivors 96
 largest (iii): log2 = -24.1963, exactly equal to 08's stored rational: True; attained at 2 sets [(19, 83, 147), (19, 147, 211)]
-PASS
+WITNESS SOUND (every listed term verified; completeness is established only by the full search)

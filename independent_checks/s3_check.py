@@ -16,11 +16,12 @@ three rows in integer arithmetic.
 Outputs
   results/s3_survivors.txt   the witness: one line "i1 i2 i3 x1 x2 x3" per full survivor
 Checks
-  * per-chunk survivor counts equal the "full_survivors" fields of results/s3_chunks/*.json;
+  * per-chunk survivor counts equal the "full_survivors" fields of results/s3_chunks/*.json
+    (08 stores counts per chunk, not the survivors themselves);
   * the largest per-set exact value sum_x (2^36 / P(x))^42, P(x) = prod over the six coordinates
     of (x, Cx) of max(64, |v|_c), equals the "worst" rational stored by 08, at the same set.
 
-Run:  python s3_check.py [workers]        (about 3 CPU-hours; minutes on a many-core machine)
+Run:  python s3_check.py [workers]        (about 5 CPU-hours; 14 minutes on 23 cores)
       python s3_check.py --witness        (re-check the witness file only: seconds)
 """
 import glob, json, math, os, sys, time
@@ -124,7 +125,11 @@ def check(rows, nsets_total):
     print(f"sets searched {nsets_total} (expected {n*(n-1)*(n-2)//6}); sets with a survivor {len(bys)}; survivors {len(rows)}")
     print(f"largest (iii): log2 = {math.log2(vw.numerator) - math.log2(vw.denominator):.4f}, "
           f"exactly equal to 08's stored rational: {vw == v08}; attained at {len(tied)} sets {tied}")
-    print("PASS" if ok and nsets_total in (None, n * (n - 1) * (n - 2) // 6) else "FAIL")
+    if nsets_total is None:
+        print("WITNESS SOUND (every listed term verified; completeness is established only by the full search)"
+              if ok else "FAIL")
+    else:
+        print("PASS" if ok and nsets_total == n * (n - 1) * (n - 2) // 6 else "FAIL")
 
 
 if __name__ == "__main__":

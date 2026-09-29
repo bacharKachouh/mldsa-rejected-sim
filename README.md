@@ -45,8 +45,9 @@ directory. It checks that the chunks cover every set and prints the certified bo
 `results/` holds the outputs of every script above, including the 20 per-chunk files of the
 s = 3 run, so that `combine` can be re-checked without the 18-hour search, and
 `s3_survivors.txt`, the list of all 96 terms of part (iii) of the s = 3 certificate (slot set and
-block x). `python independent_checks/s3_check.py --witness` re-verifies every listed term, checks
-the per-chunk counts against `s3_chunks/` and recomputes the largest value, in seconds.
+block x). `python independent_checks/s3_check.py --witness` re-verifies every listed term, compares
+the per-chunk counts with `s3_chunks/` and recomputes the largest value, in seconds; that the list
+is complete is established only by the searches.
 
 ## Independent checks
 
@@ -55,7 +56,7 @@ from `scripts/`, of five items: `r0_counts.py` (Lemma "bad counts are shift-inde
 `Ms.py` (the coset constants, through a product over the whole subgroup), `s2_check.py` (the
 s = 2 certificate, by an integer threshold test), `s3_check.py` (the s = 3 certificate: the
 block-step matrix formed by diagonalising in the slot basis, and the meet-in-the-middle search
-run from the other side, on the last row; about 3 CPU-hours, 14 minutes on 23 cores) and
+run from the other side, on the last row; about 5 CPU-hours, 14 minutes on 23 cores) and
 `mass_check.py` (the atypical mass, with Lambda summed piecewise and Hurwitz-zeta tails).
 `expected_output.txt` records their output.
 

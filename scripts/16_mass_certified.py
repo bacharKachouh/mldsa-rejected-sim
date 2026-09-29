@@ -201,26 +201,38 @@ EX = mass + two(-3051)                       # E_A[X(A)] <= diag bound + mass
 EX2 = mass2 + two(-3051)
 QA = two(67)
 chk = [
-    ("Theorem unconditional bound: M <= 2^-182.41", mass.b <= two(-182.41).a),
+    ("Theorem unconditional bound: M <= 2^-182.416", mass.b <= two(-182.416).a),
     ("Theorem unconditional bound: E_A SD < 2^-92.2", sd.b < two(-92.2).a),
     ("Remark two-slot: M <= 2^-135.9", mass2.b <= two(-135.9).a),
     ("Remark two-slot: E_A SD < 2^-68.9", sd2.b < two(-68.9).a),
     ("E_A X(A) < 2^-182.4", EX.b < two(-182.4).a),
 ]
-markov = QA * iv.mpf(8.5) * EX + QA * tail
-cross = iv.sqrt(2 * (iv.e - 1) * QA * EX)
-markov2 = QA * iv.mpf(8.5) * EX2 + QA * tail
-cross2 = iv.sqrt(2 * (iv.e - 1) * QA * EX2)
-print(f"Theorem uf, Q_A = 2^67: additive Markov terms Q_A (6.5 + 2) E X + Q_A Pr[r>40] <= {fmt(markov)};"
-      f" cross-term factor sqrt(2(e-1) Q_A E X) <= {fmt(cross)}")
-print(f"   with the two-slot certificate only: additive <= {fmt(markov2)}; cross-term factor <= {fmt(cross2)}")
-chk += [("additive terms < 2^-112.3", (markov + two(-189) + two(-257) + two(-362)).b < two(-112.3).a),
-        ("cross-term factor < 2^-56.8", cross.b < two(-56.8).a),
-        ("two-slot: additive < 2^-65.7", (markov2 + two(-189) + two(-257) + two(-362)).b < two(-65.7).a)]
-for kappa in (20, 40, 60):
-    life = QA * iv.mpf(6.5) * EX * two(kappa) + QA * tail
-    print(f"   per key, all but a 2^-{kappa} fraction of matrices: lifetime additive loss <= {fmt(life)};"
-          f" cross-term factor <= {fmt(iv.sqrt(2 * (iv.e - 1) * QA * EX * two(kappa)))}")
+XBAR, XBAR2 = two(-182.41), two(-135.8)     # the constants the paper's Theorem uf uses
+chk += [("E_A X(A) <= Xbar = 2^-182.41", EX.b <= XBAR.a), ("two-slot: E_A X(A) <= 2^-135.8", EX2.b <= XBAR2.a)]
+small = QA * (two(128) + QA) * (two(-844) + two(-384)) + two(-256.9) + two(-362)   # programming, eps_mu, d(A)
+markov = QA * iv.mpf(8.5) * XBAR
+cross = iv.sqrt(2 * (iv.e - 1) * QA * XBAR)
+markov2 = QA * iv.mpf(8.5) * XBAR2
+cross2 = iv.sqrt(2 * (iv.e - 1) * QA * XBAR2)
+eps_mu = (two(128) + QA + 2) ** 2 * two(-513)
+print(f"Theorem uf, Q_A = 2^67, Q_H = 2^128: Q_A (6.5 + 2) Xbar <= {fmt(markov)}; eps_mu <= {fmt(eps_mu)};"
+      f" cross-term factor sqrt(2(e-1) Q_A Xbar) <= {fmt(cross)}")
+print(f"   two-slot constants: Q_A 8.5 Xbar <= {fmt(markov2)}; cross-term factor <= {fmt(cross2)}")
+chk += [("eps_mu <= 2^-256.9", eps_mu.b <= two(-256.9).a),
+        ("8.5 Xbar <= 2^-179.32", (iv.mpf(8.5) * XBAR).b <= two(-179.32).a),
+        ("8.5 Xbar(two-slot) <= 2^-132.71", (iv.mpf(8.5) * XBAR2).b <= two(-132.71).a),
+        ("additive terms < 2^-112.3", (markov + QA * tail + small).b < two(-112.3).a),
+        ("cross-term factor < 2^-56.81", cross.b < two(-56.81).a),
+        ("two-slot: additive < 2^-65.7", (markov2 + QA * tail + small).b < two(-65.7).a),
+        ("two-slot: cross-term factor < 2^-33.5", cross2.b < two(-33.5).a)]
+# Corollary "one key": X(A) <= 2^(-182.41 + kappa); additive 6.5 Q_A X + Q_A Pr[r>40] + small
+for kappa in (0, 20, 40, 60, 114):
+    life = QA * iv.mpf(6.5) * two(-182.41 + kappa) + QA * tail + small
+    cr = iv.sqrt(2 * (iv.e - 1) * QA * two(-182.41 + kappa))
+    good = (2 * QA * two(-182.41 + kappa)).b <= 1
+    print(f"   one key, kappa = {kappa:3d}: additive <= {fmt(life)}; cross-term factor <= {fmt(cr)}; key good: {good}")
+    chk.append((f"one key, kappa = {kappa}: additive < 2^(-112.7+kappa), cross < 2^(-56.8+kappa/2), good",
+                life.b < two(-112.7 + kappa).a and cr.b < two(-56.8 + kappa / 2).a and good))
 for label, ok in chk:
     print(f"   {'PASS' if ok else 'FAIL'}  {label}")
 print(f"[{time.time()-t0:.0f}s]")
